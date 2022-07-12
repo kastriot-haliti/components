@@ -1,3 +1,3 @@
-export { default as EnhancedTable} from './EnhancedTable/enhancedTable.component.tsx'
-export { default as EnhancedTableToolbar } from './EnhancedTable/enhancedTableToolbar.component.tsx'
-export { default as EnhancedTableHead } from './EnhancedTable/enhancedHead.component.tsx'
+export { default as EnhancedTable} from './EnhancedTable/enhancedTable.component'
+export { default as EnhancedTableToolbar } from './EnhancedTable/enhancedTableToolbar.component'
+export { default as EnhancedTableHead } from './EnhancedTable/enhancedHead.component'

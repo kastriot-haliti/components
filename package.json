@@ -10,13 +10,14 @@
   "author": "Kastriot Haliti",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^4.7.4",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
     "@material-ui/core": "^4.12.3",
     "@mui/icons-material": "^5.4.2",
     "@mui/material": "^5.4.3",
     "@mui/styled-engine-sc": "^5.4.2",
-    "@mui/x-date-pickers": "^5.0.0-alpha.7"
+    "@mui/x-date-pickers": "^5.0.0-alpha.7",
+    "@types/node": "^18.0.3",
+    "typescript": "^4.7.4"
   }
 }
