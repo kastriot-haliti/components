@@ -15,13 +15,13 @@ interface Props {
   title: string,
   numSelected: number;
 
-  handleClickAdd(): void;
+  handleClickAdd?(): void;
 
-  handleClickEdit(): void;
+  handleClickEdit?(): void;
 
-  handleClickDelete(): void;
-  handleClickFilter(): void;
-  handleClickSettings(): void;
+  handleClickDelete?(): void;
+  handleClickFilter?(): void;
+  handleClickSettings?(): void;
 }
 
 const EnhancedTableToolbar = (props: Props) => {

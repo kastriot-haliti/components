@@ -12,10 +12,10 @@ import {ITableColumn} from '../types/ITableColumn.interface';
 interface Props {
   columns: ITableColumn[],
   numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof any) => void;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof ITableColumn) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
-  orderBy: string;
+  orderBy?: string;
   rowCount: number;
 }
 
@@ -32,7 +32,7 @@ const EnhancedTableHead = (props: Props) => {
 
   const createSortHandler =
       (property: keyof any) => (event: React.MouseEvent<unknown>) => {
-        props.onRequestSort(event, property);
+        // props.onRequestSort(event, property);
       };
 
   return (

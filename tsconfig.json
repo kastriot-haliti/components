@@ -1,13 +1,21 @@
 {
-  "compileOnSave": true,
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    // Default
+    "target": "es5",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+
+    // Added
+    "jsx": "react",
+    "module": "ESNext",
     "declaration": true,
-    "outDir": "./lib",
+    "declarationDir": "types",
     "sourceMap": true,
-    "jsx": "react"
-  },
-  "exclude": ["node_modules", "**/__tests__/*"],
-  "outDir": "./dist/"
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "emitDeclarationOnly": true,
+  }
 }

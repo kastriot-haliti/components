@@ -1,4 +1,4 @@
-import {TableCellType} from '../../enums/TableCellType.enum.ts';
+import {TableCellType} from '../enums/tableCellType.enum';
 
 export interface ITableCell {
   key: string,

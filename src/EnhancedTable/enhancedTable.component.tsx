@@ -20,13 +20,13 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import EnhancedTableToolbar from './enhancedTableToolbar.component.tsx';
-import EnhancedTableHead from './enhancedHead.component.tsx';
 import {FC, useEffect, useState} from 'react';
 import {ITableColumn} from '../types/ITableColumn.interface';
 import {ITableRow} from '../types/ITableRow.interface';
-import {TableCellType} from '../enums/tableCellType.enum.ts';
+import {TableCellType} from '../enums/tableCellType.enum';
 import {ITableCell} from '../types/ITableCell.interface';
+import EnhancedTableToolbar from './enhancedTableToolbar.component';
+import EnhancedTableHead from './enhancedHead.component';
 
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -39,38 +39,41 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
+const getComparator = () => {}
+
+// function getComparator<Key extends keyof any>(
+//     order: Order,
+//     orderBy?: Key,
+// ): (
+//     a: { [key in Key]: number | string },
+//     b: { [key in Key]: number | string },
+// ) => number {
+//     return order === 'desc'
+//         ? (a, b) => descendingComparator(a, b, orderBy)
+//         : (a, b) => -descendingComparator(a, b, orderBy);
+// }
 
 
-function getComparator<Key extends keyof any>(
-    order: Order,
-    orderBy: Key,
-): (
-    a: { [key in Key]: number | string },
-    b: { [key in Key]: number | string },
-) => number {
-  return order === 'desc'
-      ? (a, b) => descendingComparator(a, b, orderBy)
-      : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
+const stableSort = () => {}
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
-function stableSort<T>(array: readonly ITableRow[], comparator: (a: T, b: T) => number) {
-  // const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
-
-  // array.sort((a, b) => {
-  //   const order = comparator(a[0], b[0]);
-  //   if (order !== 0) {
-  //     return order;
-  //   }
-  //   return a[1] - b[1];
-  // });
-  // return stabilizedThis.map((el) => el[0]);
-  return array;
-}
+// function stableSort<T>(array: readonly ITableRow[], comparator: (a: T, b: T) => number) {
+//   // const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
+//
+//   // array.sort((a, b) => {
+//   //   const order = comparator(a[0], b[0]);
+//   //   if (order !== 0) {
+//   //     return order;
+//   //   }
+//   //   return a[1] - b[1];
+//   // });
+//   // return stabilizedThis.map((el) => el[0]);
+//   return array;
+// }
 
 
 interface Props {
+  title: string,
   columns: ITableColumn[],
   rows: ITableRow[],
   dense: boolean;
@@ -164,13 +167,18 @@ const EnhancedTable:FC = (props: Props) => {
 
   const showCell = (cell: ITableCell): boolean => {
     let foundColumn = columns.find(x => x.id == cell.columnId);
-    return foundColumn?.show;
+    return foundColumn?.show ?? false;
   }
 
-  return (
+  return <>
       <Box sx={{ width: '100%' }}>
         <Paper sx={{ width: '100%', mb: 2 }}>
-          <EnhancedTableToolbar title={props.title} numSelected={selected.length} handleClickAdd={props.handleOpenAddDialog} handleClickFilter={props.handleOpenFilterDialog} handleClickSettings={props.handleOpenSettingsDialog} handleClickDelete={props.handleOpenDeleteDialog} />
+          <EnhancedTableToolbar title={props.title} numSelected={selected.length}
+                                handleClickAdd={props.handleOpenAddDialog}
+                                handleClickFilter={props.handleOpenFilterDialog}
+                                handleClickSettings={props.handleOpenSettingsDialog}
+                                handleClickDelete={props.handleOpenDeleteDialog}
+          />
           <TableContainer>
             <Table
                 sx={{ minWidth: 750 }}
@@ -188,8 +196,8 @@ const EnhancedTable:FC = (props: Props) => {
               />
               <TableBody>
 
-                {stableSort(rows, getComparator(order, orderBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                {/*{stableSort(rows, getComparator(order, orderBy))*/}
+                {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
                       const isItemSelected = isSelected(row.key);
                       const labelId = `enhanced-table-checkbox-${index}`;
@@ -248,7 +256,7 @@ const EnhancedTable:FC = (props: Props) => {
           />
         </Paper>
       </Box>
-  );
+  </>;
 }
 
 export default EnhancedTable;
