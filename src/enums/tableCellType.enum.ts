@@ -1,6 +1,8 @@
-export enum TableCellType {
+enum TableCellType {
   Default,
   Text,
   Number,
   Select
 }
+
+export default TableCellType;

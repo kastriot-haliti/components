@@ -1,19 +1,19 @@
+import * as React from 'react';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Checkbox from '@mui/material/Checkbox';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Box from '@mui/material/Box';
 import {visuallyHidden} from '@mui/utils';
-import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {useEffect, useState,FC,MouseEvent,ChangeEvent} from 'react';
 import {TableHead} from '@mui/material';
-import {ITableColumn} from '../types/ITableColumn.interface';
+import ITableColumn from '../types/ITableColumn.interface';
 
 interface Props {
   columns: ITableColumn[],
   numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof ITableColumn) => void;
-  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onRequestSort: (event: MouseEvent<unknown>, property: keyof ITableColumn) => void;
+  onSelectAllClick: (event: ChangeEvent<HTMLInputElement>) => void;
   order: Order;
   orderBy?: string;
   rowCount: number;
@@ -21,7 +21,7 @@ interface Props {
 
 type Order = 'asc' | 'desc';
 
-const EnhancedTableHead = (props: Props) => {
+const EnhancedTableHead:FC<Props> = (props: Props) => {
   const [columns,setColumns] = useState<ITableColumn[]>([]);
 
   useEffect(()=>{
@@ -35,7 +35,7 @@ const EnhancedTableHead = (props: Props) => {
         // props.onRequestSort(event, property);
       };
 
-  return (
+  return <>
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
@@ -74,7 +74,7 @@ const EnhancedTableHead = (props: Props) => {
           })}
         </TableRow>
       </TableHead>
-  );
+  </>;
 }
 
 export default EnhancedTableHead;

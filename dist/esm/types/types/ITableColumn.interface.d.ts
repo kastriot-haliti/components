@@ -1,5 +1,5 @@
-import { TableCellType } from '../enums/tableCellType.enum';
-export interface ITableColumn {
+import TableCellType from '../enums/tableCellType.enum';
+interface ITableColumn {
     id: string;
     label: string;
     minWidth?: number;
@@ -9,3 +9,4 @@ export interface ITableColumn {
     disablePadding: boolean;
     show: boolean;
 }
+export default ITableColumn;

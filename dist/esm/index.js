@@ -32423,6 +32423,7 @@ var TableCellType;
     TableCellType[TableCellType["Number"] = 2] = "Number";
     TableCellType[TableCellType["Select"] = 3] = "Select";
 })(TableCellType || (TableCellType = {}));
+var TableCellType$1 = TableCellType;
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -56726,20 +56727,21 @@ var EnhancedTableHead = function (props) {
     var createSortHandler = function (property) { return function (event) {
         // props.onRequestSort(event, property);
     }; };
-    return (React.createElement(TableHead, null,
-        React.createElement(TableRow, null,
-            React.createElement(TableCell, { padding: "checkbox" },
-                React.createElement(Checkbox, { color: "primary", indeterminate: props.numSelected > 0 && props.numSelected < props.rowCount, checked: props.rowCount > 0 && props.numSelected === props.rowCount, onChange: props.onSelectAllClick, inputProps: {
-                        'aria-label': 'select all desserts',
-                    } })),
-            columns.map(function (column) {
-                if (column.show) {
-                    return React.createElement(TableCell, { key: column.id, align: column.align, padding: column.disablePadding ? 'none' : 'normal', sortDirection: props.orderBy === column.id ? props.order : false },
-                        React.createElement(TableSortLabel, { active: props.orderBy === column.id, direction: props.orderBy === column.id ? props.order : 'asc', onClick: createSortHandler(column.id) },
-                            column.label,
-                            props.orderBy === column.id ? (React.createElement(Box, { component: "span", sx: visuallyHidden }, props.order === 'desc' ? 'sorted descending' : 'sorted ascending')) : null));
-                }
-            }))));
+    return React.createElement(React.Fragment, null,
+        React.createElement(TableHead, null,
+            React.createElement(TableRow, null,
+                React.createElement(TableCell, { padding: "checkbox" },
+                    React.createElement(Checkbox, { color: "primary", indeterminate: props.numSelected > 0 && props.numSelected < props.rowCount, checked: props.rowCount > 0 && props.numSelected === props.rowCount, onChange: props.onSelectAllClick, inputProps: {
+                            'aria-label': 'select all desserts',
+                        } })),
+                columns.map(function (column) {
+                    if (column.show) {
+                        return React.createElement(TableCell, { key: column.id, align: column.align, padding: column.disablePadding ? 'none' : 'normal', sortDirection: props.orderBy === column.id ? props.order : false },
+                            React.createElement(TableSortLabel, { active: props.orderBy === column.id, direction: props.orderBy === column.id ? props.order : 'asc', onClick: createSortHandler(column.id) },
+                                column.label,
+                                props.orderBy === column.id ? (React.createElement(Box, { component: "span", sx: visuallyHidden }, props.order === 'desc' ? 'sorted descending' : 'sorted ascending')) : null));
+                    }
+                }))));
 };
 
 var EnhancedTable = function (props) {
@@ -56757,7 +56759,9 @@ var EnhancedTable = function (props) {
         }
     }, [props.columns]);
     useEffect(function () {
-        setDense(props.dense);
+        if (props.dense != undefined) {
+            setDense(props.dense);
+        }
     }, [props.dense]);
     useEffect(function () {
         if (props.rows) {
@@ -56809,39 +56813,41 @@ var EnhancedTable = function (props) {
         var foundColumn = columns.find(function (x) { return x.id == cell.columnId; });
         return (_a = foundColumn === null || foundColumn === void 0 ? void 0 : foundColumn.show) !== null && _a !== void 0 ? _a : false;
     };
-    return (React.createElement(Box, { sx: { width: '100%' } },
-        React.createElement(Paper, { sx: { width: '100%', mb: 2 } },
-            React.createElement(EnhancedTableToolbar, { title: props.title, numSelected: selected.length, handleClickAdd: props.handleOpenAddDialog, handleClickFilter: props.handleOpenFilterDialog, handleClickSettings: props.handleOpenSettingsDialog, handleClickDelete: props.handleOpenDeleteDialog }),
-            React.createElement(TableContainer, null,
-                React.createElement(Table, { sx: { minWidth: 750 }, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium' },
-                    React.createElement(EnhancedTableHead, { columns: columns, numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length }),
-                    React.createElement(TableBody, null,
-                        rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map(function (row, index) {
-                            var isItemSelected = isSelected(row.key);
-                            var labelId = "enhanced-table-checkbox-".concat(index);
-                            return (React.createElement(TableRow, { hover: true, onClick: function (event) { return handleClick(event, row.key); }, role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, key: row.key, selected: isItemSelected },
-                                React.createElement(TableCell, { padding: "checkbox" },
-                                    React.createElement(Checkbox, { color: "primary", checked: isItemSelected, inputProps: {
-                                            'aria-labelledby': labelId,
-                                        } })),
-                                row.data.map(function (item) {
-                                    if (showCell(item)) {
-                                        if (item.type === TableCellType.Default) {
-                                            return item.value;
-                                        }
-                                        else {
-                                            return React.createElement(TableCell, null, item.value);
-                                        }
-                                    }
-                                })));
-                        }),
-                        emptyRows > 0 && (React.createElement(TableRow, { style: {
-                                height: (dense ? 33 : 53) * emptyRows,
-                            } },
-                            React.createElement(TableCell, { colSpan: 6 })))))),
-            React.createElement(TablePagination, { rowsPerPageOptions: [5, 10, 25], component: "div", count: rows.length, rowsPerPage: rowsPerPage, page: page, onPageChange: handleChangePage, onRowsPerPageChange: handleChangeRowsPerPage }))));
+    return React.createElement(React.Fragment, null,
+        React.createElement(Box, { sx: { width: '100%' } },
+            React.createElement(Paper, { sx: { width: '100%', mb: 2 } },
+                React.createElement(EnhancedTableToolbar, { title: props.title, numSelected: selected.length, handleClickAdd: props.handleOpenAddDialog, handleClickFilter: props.handleOpenFilterDialog, handleClickSettings: props.handleOpenSettingsDialog, handleClickDelete: props.handleOpenDeleteDialog }),
+                React.createElement(TableContainer, null,
+                    React.createElement(Table, { sx: { minWidth: 750 }, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium' },
+                        React.createElement(EnhancedTableHead, { columns: columns, numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length }),
+                        React.createElement(TableBody, null,
+                            rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map(function (row, index) {
+                                var isItemSelected = isSelected(row.key);
+                                var labelId = "enhanced-table-checkbox-".concat(index);
+                                return React.createElement(React.Fragment, null,
+                                    React.createElement(TableRow, { hover: true, onClick: function (event) { return handleClick(event, row.key); }, role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, key: row.key, selected: isItemSelected },
+                                        React.createElement(TableCell, { padding: "checkbox" },
+                                            React.createElement(Checkbox, { color: "primary", checked: isItemSelected, inputProps: {
+                                                    'aria-labelledby': labelId,
+                                                } })),
+                                        row.data.map(function (item) {
+                                            if (showCell(item)) {
+                                                if (item.type === TableCellType$1.Default) {
+                                                    return item.value;
+                                                }
+                                                else {
+                                                    return React.createElement(TableCell, null, item.value);
+                                                }
+                                            }
+                                        })));
+                            }),
+                            emptyRows > 0 && (React.createElement(TableRow, { style: {
+                                    height: (dense ? 33 : 53) * emptyRows,
+                                } },
+                                React.createElement(TableCell, { colSpan: 6 })))))),
+                React.createElement(TablePagination, { rowsPerPageOptions: [5, 10, 25], component: "div", count: rows.length, rowsPerPage: rowsPerPage, page: page, onPageChange: handleChangePage, onRowsPerPageChange: handleChangeRowsPerPage }))));
 };
 
-export { EnhancedTable, EnhancedTableHead, EnhancedTableToolbar };
+export { EnhancedTable, EnhancedTableHead, EnhancedTableToolbar, TableCellType$1 as TableCellType };
 //# sourceMappingURL=index.js.map

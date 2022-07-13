@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { ITableColumn } from '../types/ITableColumn.interface';
+import { FC, MouseEvent, ChangeEvent } from 'react';
+import ITableColumn from '../types/ITableColumn.interface';
 interface Props {
     columns: ITableColumn[];
     numSelected: number;
-    onRequestSort: (event: React.MouseEvent<unknown>, property: keyof ITableColumn) => void;
-    onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onRequestSort: (event: MouseEvent<unknown>, property: keyof ITableColumn) => void;
+    onSelectAllClick: (event: ChangeEvent<HTMLInputElement>) => void;
     order: Order;
     orderBy?: string;
     rowCount: number;
 }
 declare type Order = 'asc' | 'desc';
-declare const EnhancedTableHead: (props: Props) => JSX.Element;
+declare const EnhancedTableHead: FC<Props>;
 export default EnhancedTableHead;

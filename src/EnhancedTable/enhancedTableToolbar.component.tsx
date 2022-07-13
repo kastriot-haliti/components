@@ -1,3 +1,4 @@
+import * as React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import {alpha} from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -8,11 +9,10 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import SettingsIcon from '@mui/icons-material/Settings';
-import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {useEffect, useState,FC} from 'react';
 
 interface Props {
-  title: string,
+  title?: string,
   numSelected: number;
 
   handleClickAdd?(): void;
@@ -24,7 +24,7 @@ interface Props {
   handleClickSettings?(): void;
 }
 
-const EnhancedTableToolbar = (props: Props) => {
+const EnhancedTableToolbar: FC<Props> = (props: Props) => {
   const [title,setTitle] = useState<string>('')
   const [numSelected,setNumSelected] = useState<number>(0);
 

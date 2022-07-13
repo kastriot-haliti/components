@@ -21,10 +21,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import {FC, useEffect, useState} from 'react';
-import {ITableColumn} from '../types/ITableColumn.interface';
-import {ITableRow} from '../types/ITableRow.interface';
-import {TableCellType} from '../enums/tableCellType.enum';
-import {ITableCell} from '../types/ITableCell.interface';
+import ITableColumn from '../types/ITableColumn.interface';
+import ITableRow from '../types/ITableRow.interface';
+import TableCellType from '../enums/tableCellType.enum';
+import ITableCell from '../types/ITableCell.interface';
 import EnhancedTableToolbar from './enhancedTableToolbar.component';
 import EnhancedTableHead from './enhancedHead.component';
 
@@ -73,19 +73,19 @@ const stableSort = () => {}
 
 
 interface Props {
-  title: string,
-  columns: ITableColumn[],
-  rows: ITableRow[],
-  dense: boolean;
+  title?: string,
+  columns?: ITableColumn[],
+  rows?: ITableRow[],
+  dense?: boolean;
   handleOpenAddDialog(): void;
-  handleOpenFilterDialog(): void;
-  handleOpenSettingsDialog(): void;
-  handleOpenDeleteDialog(): void;
+  handleOpenFilterDialog?(): void;
+  handleOpenSettingsDialog?(): void;
+  handleOpenDeleteDialog?(): void;
 }
 
 type Order = 'asc' | 'desc';
 
-const EnhancedTable:FC = (props: Props) => {
+const EnhancedTable:FC<Props> = (props) => {
   const [columns,setColumns] = useState<ITableColumn[]>([]);
   const [rows,setRows] = useState<ITableRow[]>([])
 
@@ -103,7 +103,9 @@ const EnhancedTable:FC = (props: Props) => {
   },[props.columns])
 
   useEffect(() => {
-    setDense(props.dense);
+    if(props.dense != undefined) {
+      setDense(props.dense);
+    }
   },[props.dense])
 
   useEffect(()=>{
@@ -202,7 +204,7 @@ const EnhancedTable:FC = (props: Props) => {
                       const isItemSelected = isSelected(row.key);
                       const labelId = `enhanced-table-checkbox-${index}`;
 
-                      return (
+                      return <>
                           <TableRow
                               hover
                               onClick={(event) => handleClick(event, row.key)}
@@ -231,7 +233,7 @@ const EnhancedTable:FC = (props: Props) => {
                               }
                             })}
                           </TableRow>
-                      );
+                      </>;
                     })}
                 {emptyRows > 0 && (
                     <TableRow

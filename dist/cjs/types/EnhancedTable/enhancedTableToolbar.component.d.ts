@@ -1,6 +1,6 @@
-/// <reference types="react" />
+import { FC } from 'react';
 interface Props {
-    title: string;
+    title?: string;
     numSelected: number;
     handleClickAdd?(): void;
     handleClickEdit?(): void;
@@ -8,5 +8,5 @@ interface Props {
     handleClickFilter?(): void;
     handleClickSettings?(): void;
 }
-declare const EnhancedTableToolbar: (props: Props) => JSX.Element;
+declare const EnhancedTableToolbar: FC<Props>;
 export default EnhancedTableToolbar;

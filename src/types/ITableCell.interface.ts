@@ -1,6 +1,6 @@
-import {TableCellType} from '../enums/tableCellType.enum';
+import TableCellType from '../enums/tableCellType.enum';
 
-export interface ITableCell {
+interface ITableCell {
   key: string,
   minWidth?: number;
   align?: 'right' | 'left' | 'center';
@@ -9,3 +9,5 @@ export interface ITableCell {
   value: string;
   columnId: string;
 }
+
+export default ITableCell;
