@@ -42,7 +42,6 @@ interface Props$2 {
     handleOpenFilterDialog?(): void;
     handleOpenSettingsDialog?(): void;
     handleOpenDeleteDialog?(): void;
-    children: any;
 }
 declare const EnhancedTable: FC<Props$2>;
 

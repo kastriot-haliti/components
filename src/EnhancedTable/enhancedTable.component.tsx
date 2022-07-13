@@ -75,13 +75,12 @@ const stableSort = () => {}
 interface Props {
   title?: string,
   columns?: ITableColumn[],
-  rows?: ITableRow[],
+  rows?: any[],
   dense?: boolean;
   handleOpenAddDialog(): void;
   handleOpenFilterDialog?(): void;
   handleOpenSettingsDialog?(): void;
   handleOpenDeleteDialog?(): void;
-  children: any;
 }
 
 type Order = 'asc' | 'desc';
@@ -174,7 +173,6 @@ const EnhancedTable:FC<Props> = (props) => {
   }
 
   return <>
-      {props.children}
       <Box sx={{ width: '100%' }}>
         <Paper sx={{ width: '100%', mb: 2 }}>
           <EnhancedTableToolbar title={props.title} numSelected={selected.length}

@@ -56814,7 +56814,6 @@ var EnhancedTable = function (props) {
         return (_a = foundColumn === null || foundColumn === void 0 ? void 0 : foundColumn.show) !== null && _a !== void 0 ? _a : false;
     };
     return React.createElement(React.Fragment, null,
-        props.children,
         React.createElement(Box, { sx: { width: '100%' } },
             React.createElement(Paper, { sx: { width: '100%', mb: 2 } },
                 React.createElement(EnhancedTableToolbar, { title: props.title, numSelected: selected.length, handleClickAdd: props.handleOpenAddDialog, handleClickFilter: props.handleOpenFilterDialog, handleClickSettings: props.handleOpenSettingsDialog, handleClickDelete: props.handleOpenDeleteDialog }),
