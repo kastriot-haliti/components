@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import ITableColumn from '../types/ITableColumn.interface';
-import ITableRow from '../types/ITableRow.interface';
 interface Props {
     title?: string;
     columns?: ITableColumn[];
-    rows?: ITableRow[];
+    rows?: any[];
     dense?: boolean;
     handleOpenAddDialog(): void;
     handleOpenFilterDialog?(): void;

@@ -18,25 +18,10 @@ interface ITableColumn {
     show: boolean;
 }
 
-interface ITableCell {
-    key: string;
-    minWidth?: number;
-    align?: 'right' | 'left' | 'center';
-    format?: (value: number) => string;
-    type?: TableCellType;
-    value: string;
-    columnId: string;
-}
-
-interface ITableRow {
-    key: string;
-    data: ITableCell[];
-}
-
 interface Props$2 {
     title?: string;
     columns?: ITableColumn[];
-    rows?: ITableRow[];
+    rows?: any[];
     dense?: boolean;
     handleOpenAddDialog(): void;
     handleOpenFilterDialog?(): void;
@@ -67,5 +52,20 @@ interface Props {
 }
 declare type Order = 'asc' | 'desc';
 declare const EnhancedTableHead: FC<Props>;
+
+interface ITableCell {
+    key: string;
+    minWidth?: number;
+    align?: 'right' | 'left' | 'center';
+    format?: (value: number) => string;
+    type?: TableCellType;
+    value: string;
+    columnId: string;
+}
+
+interface ITableRow {
+    key: string;
+    data: ITableCell[];
+}
 
 export { EnhancedTable, EnhancedTableHead, EnhancedTableToolbar, ITableCell, ITableColumn, ITableRow, TableCellType };
