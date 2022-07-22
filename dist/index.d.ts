@@ -27,6 +27,7 @@ interface Props$2 {
     handleOpenFilterDialog?(): void;
     handleOpenSettingsDialog?(): void;
     handleOpenDeleteDialog?(): void;
+    handleSelectRows(selected: number[]): void;
 }
 declare const EnhancedTable: FC<Props$2>;
 
@@ -64,6 +65,7 @@ interface ITableCell {
 }
 
 interface ITableRow {
+    id: number;
     key: string;
     data: ITableCell[];
 }

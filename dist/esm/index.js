@@ -4,6 +4,42 @@ import require$$2, { jsx, jsxs } from 'react/jsx-runtime';
 import * as ReactDOM from 'react-dom';
 import ReactDOM__default, { flushSync } from 'react-dom';
 
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
 function _extends() {
   _extends = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -32425,32 +32461,6 @@ var TableCellType;
 })(TableCellType || (TableCellType = {}));
 var TableCellType$1 = TableCellType;
 
-/******************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-
 const PopperRoot = styled(PopperUnstyled, {
   name: 'MuiPopper',
   slot: 'Root',
@@ -33425,25 +33435,25 @@ const unstable_ClassNameGenerator = {
 };
 
 var utils = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  unstable_ClassNameGenerator: unstable_ClassNameGenerator,
-  capitalize: capitalize,
-  createChainedFunction: createChainedFunction,
-  createSvgIcon: createSvgIcon$1,
-  debounce: debounce$1,
-  deprecatedPropType: deprecatedPropType,
-  isMuiElement: isMuiElement,
-  ownerDocument: ownerDocument,
-  ownerWindow: ownerWindow,
-  requirePropFactory: requirePropFactory,
-  setRef: setRef,
-  unstable_useEnhancedEffect: useEnhancedEffect,
-  unstable_useId: useId,
-  unsupportedProp: unsupportedProp,
-  useControlled: useControlled,
-  useEventCallback: useEventCallback,
-  useForkRef: useForkRef,
-  useIsFocusVisible: useIsFocusVisible
+    __proto__: null,
+    unstable_ClassNameGenerator: unstable_ClassNameGenerator,
+    capitalize: capitalize,
+    createChainedFunction: createChainedFunction,
+    createSvgIcon: createSvgIcon$1,
+    debounce: debounce$1,
+    deprecatedPropType: deprecatedPropType,
+    isMuiElement: isMuiElement,
+    ownerDocument: ownerDocument,
+    ownerWindow: ownerWindow,
+    requirePropFactory: requirePropFactory,
+    setRef: setRef,
+    unstable_useEnhancedEffect: useEnhancedEffect,
+    unstable_useId: useId,
+    unsupportedProp: unsupportedProp,
+    useControlled: useControlled,
+    useEventCallback: useEventCallback,
+    useForkRef: useForkRef,
+    useIsFocusVisible: useIsFocusVisible
 });
 
 var require$$0 = /*@__PURE__*/getAugmentedNamespace(utils);
@@ -56749,6 +56759,7 @@ var EnhancedTable = function (props) {
     var _b = useState([]), rows = _b[0], setRows = _b[1];
     var _c = useState('asc'), order = _c[0], setOrder = _c[1];
     var _d = useState(), orderBy = _d[0], setOrderBy = _d[1];
+    // const [selected, setSelected] = useState<string[]>([]);
     var _e = useState([]), selected = _e[0], setSelected = _e[1];
     var _f = useState(0), page = _f[0], setPage = _f[1];
     var _g = useState(false), dense = _g[0], setDense = _g[1];
@@ -56768,6 +56779,11 @@ var EnhancedTable = function (props) {
             setRows(props.rows);
         }
     }, [props.rows]);
+    useEffect(function () {
+        if (selected != undefined) {
+            props.handleSelectRows(selected);
+        }
+    }, [selected]);
     var handleRequestSort = function (event, property) {
         var isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
@@ -56775,26 +56791,37 @@ var EnhancedTable = function (props) {
     };
     var handleSelectAllClick = function (event) {
         if (event.target.checked) {
-            var newSelecteds = rows.map(function (n) { return n.key; });
+            var newSelecteds = rows.map(function (n) { return n.id; });
+            debugger;
             setSelected(newSelecteds);
             return;
         }
         setSelected([]);
     };
-    var handleClick = function (event, name) {
-        var selectedIndex = selected.indexOf(name);
+    var handleClick = function (event, id) {
+        // const selectedIndex = selected.indexOf(name);
+        // let newSelected: string[] = [];
+        //
+        // if (selectedIndex === -1) {
+        //   newSelected = newSelected.concat(selected, name);
+        // } else if (selectedIndex === 0) {
+        //   newSelected = newSelected.concat(selected.slice(1));
+        // } else if (selectedIndex === selected.length - 1) {
+        //   newSelected = newSelected.concat(selected.slice(0, -1));
+        // } else if (selectedIndex > 0) {
+        //   newSelected = newSelected.concat(
+        //       selected.slice(0, selectedIndex),
+        //       selected.slice(selectedIndex + 1),
+        //   );
+        // }
+        debugger;
         var newSelected = [];
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, name);
+        var foundSelected = selected.find(function (x) { return x === id; });
+        if (!foundSelected) {
+            newSelected = __spreadArray(__spreadArray([], selected, true), [id], false);
         }
-        else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        }
-        else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        }
-        else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+        else {
+            newSelected = selected.filter(function (x) { return x != id; });
         }
         setSelected(newSelected);
     };
@@ -56805,7 +56832,8 @@ var EnhancedTable = function (props) {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
-    var isSelected = function (name) { return selected.indexOf(name) !== -1; };
+    // const isSelected = (name: string) => selected.indexOf(name) !== -1;
+    var isSelected = function (id) { return !!selected.find(function (x) { return x === id; }); };
     // Avoid a layout jump when reaching the last page with empty rows.
     var emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
     var showCell = function (cell) {
@@ -56823,10 +56851,10 @@ var EnhancedTable = function (props) {
                         React.createElement(TableBody, null,
                             rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(function (row, index) {
-                                var isItemSelected = isSelected(row.key);
+                                var isItemSelected = isSelected(row.id);
                                 var labelId = "enhanced-table-checkbox-".concat(index);
                                 return React.createElement(React.Fragment, null,
-                                    React.createElement(TableRow, { hover: true, onClick: function (event) { return handleClick(event, row.key); }, role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, key: row.key, selected: isItemSelected },
+                                    React.createElement(TableRow, { hover: true, onClick: function (event) { return handleClick(event, row.id); }, role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, key: row.key, selected: isItemSelected },
                                         React.createElement(TableCell, { padding: "checkbox" },
                                             React.createElement(Checkbox, { color: "primary", checked: isItemSelected, inputProps: {
                                                     'aria-labelledby': labelId,

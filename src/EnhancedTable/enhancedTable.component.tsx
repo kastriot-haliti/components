@@ -1,25 +1,13 @@
 import * as React from 'react';
-import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import { visuallyHidden } from '@mui/utils';
 import {FC, useEffect, useState} from 'react';
 import ITableColumn from '../types/ITableColumn.interface';
 import ITableRow from '../types/ITableRow.interface';
@@ -81,6 +69,7 @@ interface Props {
   handleOpenFilterDialog?(): void;
   handleOpenSettingsDialog?(): void;
   handleOpenDeleteDialog?(): void;
+  handleSelectRows(selected: number[]): void;
 }
 
 type Order = 'asc' | 'desc';
@@ -91,7 +80,7 @@ const EnhancedTable:FC<Props> = (props) => {
 
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof ITableColumn>();
-  const [selected, setSelected] = useState<readonly string[]>([]);
+  const [selected, setSelected] = useState<number[]>([]);
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -114,6 +103,12 @@ const EnhancedTable:FC<Props> = (props) => {
     }
   },[props.rows])
 
+  useEffect(() => {
+    if(selected != undefined) {
+      props.handleSelectRows(selected)
+    }
+  },[selected])
+
   const handleRequestSort = (
       event: React.MouseEvent<unknown>,
       property: keyof ITableColumn,
@@ -125,28 +120,21 @@ const EnhancedTable:FC<Props> = (props) => {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.key);
+      const newSelecteds = rows.map((n) => n.id);
+      debugger;
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected: readonly string[] = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-          selected.slice(0, selectedIndex),
-          selected.slice(selectedIndex + 1),
-      );
+  const handleClick = (event: React.MouseEvent<unknown>,id: number) => {
+    let newSelected: any[] = []
+    const foundSelected = selected.find(x => x === id);
+    if(!foundSelected) {
+      newSelected = [...selected,id];
+    } else {
+      newSelected = selected.filter(x => x != id);
     }
 
     setSelected(newSelected);
@@ -161,7 +149,7 @@ const EnhancedTable:FC<Props> = (props) => {
     setPage(0);
   };
 
-  const isSelected = (name: string) => selected.indexOf(name) !== -1;
+  const isSelected = (id: number) => !!selected.find(x => x === id);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -201,13 +189,13 @@ const EnhancedTable:FC<Props> = (props) => {
                 {/*{stableSort(rows, getComparator(order, orderBy))*/}
                 {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
-                      const isItemSelected = isSelected(row.key);
+                      const isItemSelected = isSelected(row.id);
                       const labelId = `enhanced-table-checkbox-${index}`;
 
                       return <>
                           <TableRow
                               hover
-                              onClick={(event) => handleClick(event, row.key)}
+                              onClick={(event) => handleClick(event, row.id)}
                               role="checkbox"
                               aria-checked={isItemSelected}
                               tabIndex={-1}
