@@ -165,6 +165,7 @@ const EnhancedTable:FC<Props> = (props) => {
         <Paper sx={{ width: '100%', mb: 2 }}>
           <EnhancedTableToolbar title={props.title} numSelected={selected.length}
                                 handleClickAdd={props.handleOpenAddDialog}
+                                handleClickEdit={props.handleOpenAddDialog}
                                 handleClickFilter={props.handleOpenFilterDialog}
                                 handleClickSettings={props.handleOpenSettingsDialog}
                                 handleClickDelete={props.handleOpenDeleteDialog}

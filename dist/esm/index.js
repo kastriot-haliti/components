@@ -56759,7 +56759,6 @@ var EnhancedTable = function (props) {
     var _b = useState([]), rows = _b[0], setRows = _b[1];
     var _c = useState('asc'), order = _c[0], setOrder = _c[1];
     var _d = useState(), orderBy = _d[0], setOrderBy = _d[1];
-    // const [selected, setSelected] = useState<string[]>([]);
     var _e = useState([]), selected = _e[0], setSelected = _e[1];
     var _f = useState(0), page = _f[0], setPage = _f[1];
     var _g = useState(false), dense = _g[0], setDense = _g[1];
@@ -56799,22 +56798,6 @@ var EnhancedTable = function (props) {
         setSelected([]);
     };
     var handleClick = function (event, id) {
-        // const selectedIndex = selected.indexOf(name);
-        // let newSelected: string[] = [];
-        //
-        // if (selectedIndex === -1) {
-        //   newSelected = newSelected.concat(selected, name);
-        // } else if (selectedIndex === 0) {
-        //   newSelected = newSelected.concat(selected.slice(1));
-        // } else if (selectedIndex === selected.length - 1) {
-        //   newSelected = newSelected.concat(selected.slice(0, -1));
-        // } else if (selectedIndex > 0) {
-        //   newSelected = newSelected.concat(
-        //       selected.slice(0, selectedIndex),
-        //       selected.slice(selectedIndex + 1),
-        //   );
-        // }
-        debugger;
         var newSelected = [];
         var foundSelected = selected.find(function (x) { return x === id; });
         if (!foundSelected) {
@@ -56832,7 +56815,6 @@ var EnhancedTable = function (props) {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
-    // const isSelected = (name: string) => selected.indexOf(name) !== -1;
     var isSelected = function (id) { return !!selected.find(function (x) { return x === id; }); };
     // Avoid a layout jump when reaching the last page with empty rows.
     var emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -56844,7 +56826,7 @@ var EnhancedTable = function (props) {
     return React.createElement(React.Fragment, null,
         React.createElement(Box, { sx: { width: '100%' } },
             React.createElement(Paper, { sx: { width: '100%', mb: 2 } },
-                React.createElement(EnhancedTableToolbar, { title: props.title, numSelected: selected.length, handleClickAdd: props.handleOpenAddDialog, handleClickFilter: props.handleOpenFilterDialog, handleClickSettings: props.handleOpenSettingsDialog, handleClickDelete: props.handleOpenDeleteDialog }),
+                React.createElement(EnhancedTableToolbar, { title: props.title, numSelected: selected.length, handleClickAdd: props.handleOpenAddDialog, handleClickEdit: props.handleOpenAddDialog, handleClickFilter: props.handleOpenFilterDialog, handleClickSettings: props.handleOpenSettingsDialog, handleClickDelete: props.handleOpenDeleteDialog }),
                 React.createElement(TableContainer, null,
                     React.createElement(Table, { sx: { minWidth: 750 }, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium' },
                         React.createElement(EnhancedTableHead, { columns: columns, numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length }),
