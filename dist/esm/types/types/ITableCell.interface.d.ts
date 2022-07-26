@@ -5,7 +5,7 @@ interface ITableCell {
     align?: 'right' | 'left' | 'center';
     format?: (value: number) => string;
     type?: TableCellType;
-    value: string;
+    value: string | any;
     columnId: string;
 }
 export default ITableCell;
