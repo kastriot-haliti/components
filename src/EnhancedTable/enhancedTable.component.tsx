@@ -61,6 +61,7 @@ const stableSort = () => {}
 
 
 interface Props {
+  multiSelection?: boolean,
   title?: string,
   columns?: ITableColumn[],
   rows?: any[],
@@ -70,11 +71,13 @@ interface Props {
   handleOpenSettingsDialog?(): void;
   handleOpenDeleteDialog?(): void;
   handleSelectRows(selected: number[]): void;
+  width?: number
 }
 
 type Order = 'asc' | 'desc';
 
 const EnhancedTable:FC<Props> = (props) => {
+  const [multiSelection,setMultiSelection] = useState<boolean>(false);
   const [columns,setColumns] = useState<ITableColumn[]>([]);
   const [rows,setRows] = useState<ITableRow[]>([])
 
@@ -84,6 +87,17 @@ const EnhancedTable:FC<Props> = (props) => {
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [width,setWidth] = useState<number>(100);
+
+  useEffect(() => {
+    if(props.multiSelection) { setMultiSelection(props.multiSelection) }
+  },[props.multiSelection])
+
+  useEffect(() => {
+    if(props.width) {
+      setWidth(props.width)
+    }
+  },[props.width])
 
   useEffect(()=>{
     if(props.columns) {
@@ -121,14 +135,13 @@ const EnhancedTable:FC<Props> = (props) => {
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.id);
-      debugger;
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>,id: number) => {
+  const handleClickMulti = (event: React.MouseEvent<unknown>,id: number) => {
     let newSelected: any[] = []
     const foundSelected = selected.find(x => x === id);
     if(!foundSelected) {
@@ -138,6 +151,25 @@ const EnhancedTable:FC<Props> = (props) => {
     }
 
     setSelected(newSelected);
+  }
+
+  const handleClickSingle = (event: React.MouseEvent<unknown>,id: number) => {
+    let newSelected: any[] = [];
+    const foundSelected = selected.find(x => x === id);
+    if(!foundSelected) {
+      newSelected = [id];
+    }else{
+      newSelected = [];
+    }
+    setSelected(newSelected);
+  }
+
+  const handleClick = (event: React.MouseEvent<unknown>,id: number) => {
+    if(multiSelection) {
+      handleClickMulti(event,id);
+    }else{
+      handleClickSingle(event,id);
+    }
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -161,9 +193,10 @@ const EnhancedTable:FC<Props> = (props) => {
   }
 
   return <>
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: width+'%' }}>
         <Paper sx={{ width: '100%', mb: 2 }}>
-          <EnhancedTableToolbar title={props.title} numSelected={selected.length}
+          <EnhancedTableToolbar multiSelection={multiSelection}
+                                title={props.title} numSelected={selected.length}
                                 handleClickAdd={props.handleOpenAddDialog}
                                 handleClickEdit={props.handleOpenAddDialog}
                                 handleClickFilter={props.handleOpenFilterDialog}
@@ -172,7 +205,7 @@ const EnhancedTable:FC<Props> = (props) => {
           />
           <TableContainer>
             <Table
-                sx={{ minWidth: 750 }}
+
                 aria-labelledby="tableTitle"
                 size={dense ? 'small' : 'medium'}
             >

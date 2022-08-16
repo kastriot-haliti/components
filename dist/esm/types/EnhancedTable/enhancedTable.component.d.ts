@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import ITableColumn from '../types/ITableColumn.interface';
 interface Props {
+    multiSelection?: boolean;
     title?: string;
     columns?: ITableColumn[];
     rows?: any[];
@@ -10,6 +11,7 @@ interface Props {
     handleOpenSettingsDialog?(): void;
     handleOpenDeleteDialog?(): void;
     handleSelectRows(selected: number[]): void;
+    width?: number;
 }
 declare const EnhancedTable: FC<Props>;
 export default EnhancedTable;

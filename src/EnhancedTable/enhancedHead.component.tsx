@@ -10,6 +10,7 @@ import {TableHead} from '@mui/material';
 import ITableColumn from '../types/ITableColumn.interface';
 
 interface Props {
+  multiSelection?: boolean,
   columns: ITableColumn[],
   numSelected: number;
   onRequestSort: (event: MouseEvent<unknown>, property: keyof ITableColumn) => void;
@@ -22,7 +23,12 @@ interface Props {
 type Order = 'asc' | 'desc';
 
 const EnhancedTableHead:FC<Props> = (props: Props) => {
+  const [multiSelection,setMultiSelection] = useState<boolean>(false);
   const [columns,setColumns] = useState<ITableColumn[]>([]);
+
+  useEffect(() => {
+    if(props.multiSelection) { setMultiSelection(props.multiSelection) }
+  },[props.multiSelection])
 
   useEffect(()=>{
     if(props.columns) {
@@ -39,7 +45,7 @@ const EnhancedTableHead:FC<Props> = (props: Props) => {
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            <Checkbox
+            {multiSelection && <Checkbox
                 color="primary"
                 indeterminate={props.numSelected > 0 && props.numSelected < props.rowCount}
                 checked={props.rowCount > 0 && props.numSelected === props.rowCount}
@@ -47,7 +53,7 @@ const EnhancedTableHead:FC<Props> = (props: Props) => {
                 inputProps={{
                   'aria-label': 'select all desserts',
                 }}
-            />
+            />}
           </TableCell>
           {columns.map((column) => {
               if(column.show) {

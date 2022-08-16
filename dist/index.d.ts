@@ -18,7 +18,8 @@ interface ITableColumn {
     show: boolean;
 }
 
-interface Props$2 {
+interface Props$5 {
+    multiSelection?: boolean;
     title?: string;
     columns?: ITableColumn[];
     rows?: any[];
@@ -28,10 +29,12 @@ interface Props$2 {
     handleOpenSettingsDialog?(): void;
     handleOpenDeleteDialog?(): void;
     handleSelectRows(selected: number[]): void;
+    width?: number;
 }
-declare const EnhancedTable: FC<Props$2>;
+declare const EnhancedTable: FC<Props$5>;
 
-interface Props$1 {
+interface Props$4 {
+    multiSelection?: boolean;
     title?: string;
     numSelected: number;
     handleClickAdd?(): void;
@@ -40,9 +43,23 @@ interface Props$1 {
     handleClickFilter?(): void;
     handleClickSettings?(): void;
 }
-declare const EnhancedTableToolbar: FC<Props$1>;
+declare const EnhancedTableToolbar: FC<Props$4>;
 
-interface Props {
+interface Props$3 {
+    multiSelection?: boolean;
+    title?: string;
+    numSelected?: number;
+    handleClickAdd?(): void;
+    handleClickEdit?(): void;
+    handleClickDelete?(): void;
+    handleClickFilter?(): void;
+    handleClickSettings?(): void;
+    children?: any;
+}
+declare const EnhancedTableToolbar2: FC<Props$3>;
+
+interface Props$2 {
+    multiSelection?: boolean;
     columns: ITableColumn[];
     numSelected: number;
     onRequestSort: (event: MouseEvent<unknown>, property: keyof ITableColumn) => void;
@@ -52,7 +69,22 @@ interface Props {
     rowCount: number;
 }
 declare type Order = 'asc' | 'desc';
-declare const EnhancedTableHead: FC<Props>;
+declare const EnhancedTableHead: FC<Props$2>;
+
+interface Props$1 {
+    multiSelection?: boolean;
+    title?: string;
+    columns?: ITableColumn[];
+    rows?: any[];
+    dense?: boolean;
+    handleOpenAddDialog?(): void;
+    handleOpenFilterDialog?(): void;
+    handleOpenSettingsDialog?(): void;
+    handleOpenDeleteDialog?(): void;
+    handleSelectRows(selected: number[]): void;
+    width?: number;
+}
+declare const EnhancedTableBody: FC<Props$1>;
 
 interface ITableCell {
     key: string;
@@ -70,4 +102,18 @@ interface ITableRow {
     data: ITableCell[];
 }
 
-export { EnhancedTable, EnhancedTableHead, EnhancedTableToolbar, ITableCell, ITableColumn, ITableRow, TableCellType };
+declare const enhancedTableToCsv: (columns: ITableColumn[], rows: ITableRow[]) => string[][];
+
+declare enum FilterOptionType {
+    all = 0,
+    yes = 1,
+    no = 2
+}
+
+interface Props {
+    options?: FilterOptionType;
+    onChange(filter: FilterOptionType): void;
+}
+declare const FilterOption: FC<Props>;
+
+export { EnhancedTable, EnhancedTableBody, EnhancedTableHead, EnhancedTableToolbar, EnhancedTableToolbar2, FilterOption, ITableCell, ITableColumn, ITableRow, TableCellType, enhancedTableToCsv };

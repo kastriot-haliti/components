@@ -2,19 +2,12 @@ import * as React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import {alpha} from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import SettingsIcon from '@mui/icons-material/Settings';
 import {useEffect, useState,FC} from 'react';
 
 interface Props {
   multiSelection?: boolean,
   title?: string,
-  numSelected: number;
+  numSelected?: number;
 
   handleClickAdd?(): void;
 
@@ -23,9 +16,10 @@ interface Props {
   handleClickDelete?(): void;
   handleClickFilter?(): void;
   handleClickSettings?(): void;
+  children?: any
 }
 
-const EnhancedTableToolbar: FC<Props> = (props: Props) => {
+const EnhancedTableToolbar2: FC<Props> = (props: Props) => {
   const [multiSelection,setMultiSelection] = useState<boolean>(false);
   const [title,setTitle] = useState<string>('')
   const [numSelected,setNumSelected] = useState<number>(0);
@@ -84,38 +78,9 @@ const EnhancedTableToolbar: FC<Props> = (props: Props) => {
         >
           {title}
         </Typography>}
-
-        {showEditIcon() && <Tooltip title="Edit">
-          <IconButton color="primary" onClick={props.handleClickEdit}>
-            <EditIcon />
-          </IconButton>
-        </Tooltip>}
-
-        {showDeleteIcon() && <Tooltip title="Delete">
-          <IconButton color="primary" onClick={props.handleClickDelete}>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>}
-
-        {showAddIcon() && <Tooltip title="Add">
-          <IconButton color="primary" onClick={props.handleClickAdd}>
-            <AddIcon />
-          </IconButton>
-        </Tooltip>}
-
-        {showFilterIcon() && <Tooltip title="Filter list">
-          <IconButton color="primary" onClick={props.handleClickFilter}>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>}
-
-        {showSettingsIcon() && <Tooltip title="Settings">
-          <IconButton color="primary" onClick={props.handleClickSettings}>
-            <SettingsIcon />
-          </IconButton>
-        </Tooltip>}
+        {props.children}
       </Toolbar>
   </>;
 };
 
-export default EnhancedTableToolbar;
+export default EnhancedTableToolbar2;

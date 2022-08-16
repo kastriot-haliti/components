@@ -1,6 +1,7 @@
 import { FC, MouseEvent, ChangeEvent } from 'react';
 import ITableColumn from '../types/ITableColumn.interface';
 interface Props {
+    multiSelection?: boolean;
     columns: ITableColumn[];
     numSelected: number;
     onRequestSort: (event: MouseEvent<unknown>, property: keyof ITableColumn) => void;

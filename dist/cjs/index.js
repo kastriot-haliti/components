@@ -33508,102 +33508,108 @@ function requireCreateSvgIcon () {
 	return createSvgIcon;
 }
 
-var _interopRequireDefault$4 = interopRequireDefault.exports;
+var _interopRequireDefault$6 = interopRequireDefault.exports;
 
 Object.defineProperty(Delete, "__esModule", {
   value: true
 });
-var default_1$4 = Delete.default = void 0;
+var default_1$6 = Delete.default = void 0;
+
+var _createSvgIcon$6 = _interopRequireDefault$6(requireCreateSvgIcon());
+
+var _jsxRuntime$6 = require$$2__default["default"];
+
+var _default$6 = (0, _createSvgIcon$6.default)( /*#__PURE__*/(0, _jsxRuntime$6.jsx)("path", {
+  d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+}), 'Delete');
+
+default_1$6 = Delete.default = _default$6;
+
+var FilterList = {};
+
+var _interopRequireDefault$5 = interopRequireDefault.exports;
+
+Object.defineProperty(FilterList, "__esModule", {
+  value: true
+});
+var default_1$5 = FilterList.default = void 0;
+
+var _createSvgIcon$5 = _interopRequireDefault$5(requireCreateSvgIcon());
+
+var _jsxRuntime$5 = require$$2__default["default"];
+
+var _default$5 = (0, _createSvgIcon$5.default)( /*#__PURE__*/(0, _jsxRuntime$5.jsx)("path", {
+  d: "M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"
+}), 'FilterList');
+
+default_1$5 = FilterList.default = _default$5;
+
+var Add = {};
+
+var _interopRequireDefault$4 = interopRequireDefault.exports;
+
+Object.defineProperty(Add, "__esModule", {
+  value: true
+});
+var default_1$4 = Add.default = void 0;
 
 var _createSvgIcon$4 = _interopRequireDefault$4(requireCreateSvgIcon());
 
 var _jsxRuntime$4 = require$$2__default["default"];
 
 var _default$4 = (0, _createSvgIcon$4.default)( /*#__PURE__*/(0, _jsxRuntime$4.jsx)("path", {
-  d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
-}), 'Delete');
+  d: "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+}), 'Add');
 
-default_1$4 = Delete.default = _default$4;
+default_1$4 = Add.default = _default$4;
 
-var FilterList = {};
+var Edit = {};
 
 var _interopRequireDefault$3 = interopRequireDefault.exports;
 
-Object.defineProperty(FilterList, "__esModule", {
+Object.defineProperty(Edit, "__esModule", {
   value: true
 });
-var default_1$3 = FilterList.default = void 0;
+var default_1$3 = Edit.default = void 0;
 
 var _createSvgIcon$3 = _interopRequireDefault$3(requireCreateSvgIcon());
 
 var _jsxRuntime$3 = require$$2__default["default"];
 
 var _default$3 = (0, _createSvgIcon$3.default)( /*#__PURE__*/(0, _jsxRuntime$3.jsx)("path", {
-  d: "M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"
-}), 'FilterList');
+  d: "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+}), 'Edit');
 
-default_1$3 = FilterList.default = _default$3;
+default_1$3 = Edit.default = _default$3;
 
-var Add = {};
+var Settings = {};
 
 var _interopRequireDefault$2 = interopRequireDefault.exports;
 
-Object.defineProperty(Add, "__esModule", {
+Object.defineProperty(Settings, "__esModule", {
   value: true
 });
-var default_1$2 = Add.default = void 0;
+var default_1$2 = Settings.default = void 0;
 
 var _createSvgIcon$2 = _interopRequireDefault$2(requireCreateSvgIcon());
 
 var _jsxRuntime$2 = require$$2__default["default"];
 
 var _default$2 = (0, _createSvgIcon$2.default)( /*#__PURE__*/(0, _jsxRuntime$2.jsx)("path", {
-  d: "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
-}), 'Add');
-
-default_1$2 = Add.default = _default$2;
-
-var Edit = {};
-
-var _interopRequireDefault$1 = interopRequireDefault.exports;
-
-Object.defineProperty(Edit, "__esModule", {
-  value: true
-});
-var default_1$1 = Edit.default = void 0;
-
-var _createSvgIcon$1 = _interopRequireDefault$1(requireCreateSvgIcon());
-
-var _jsxRuntime$1 = require$$2__default["default"];
-
-var _default$1 = (0, _createSvgIcon$1.default)( /*#__PURE__*/(0, _jsxRuntime$1.jsx)("path", {
-  d: "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
-}), 'Edit');
-
-default_1$1 = Edit.default = _default$1;
-
-var Settings = {};
-
-var _interopRequireDefault = interopRequireDefault.exports;
-
-Object.defineProperty(Settings, "__esModule", {
-  value: true
-});
-var default_1 = Settings.default = void 0;
-
-var _createSvgIcon = _interopRequireDefault(requireCreateSvgIcon());
-
-var _jsxRuntime = require$$2__default["default"];
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
   d: "M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"
 }), 'Settings');
 
-default_1 = Settings.default = _default;
+default_1$2 = Settings.default = _default$2;
 
 var EnhancedTableToolbar = function (props) {
-    var _a = React.useState(''), title = _a[0], setTitle = _a[1];
-    var _b = React.useState(0), numSelected = _b[0], setNumSelected = _b[1];
+    var _a = React.useState(false), multiSelection = _a[0], setMultiSelection = _a[1];
+    var _b = React.useState(''), title = _b[0], setTitle = _b[1];
+    var _c = React.useState(0), numSelected = _c[0], setNumSelected = _c[1];
+    React.useEffect(function () {
+        if (props.multiSelection) {
+            setMultiSelection(props.multiSelection);
+        }
+    }, [props.multiSelection]);
     React.useEffect(function () {
         if (props.numSelected != undefined) {
             setNumSelected(props.numSelected);
@@ -33614,8 +33620,8 @@ var EnhancedTableToolbar = function (props) {
             setTitle(props.title);
         }
     }, [props.title]);
-    var showTitle = function () { return numSelected == 0; };
-    var showCountSelected = function () { return numSelected > 0; };
+    var showTitle = function () { return numSelected == 0 || !multiSelection; };
+    var showCountSelected = function () { return numSelected > 0 && multiSelection; };
     var showFilterIcon = function () { return numSelected == 0; };
     var showSettingsIcon = function () { return numSelected == 0; };
     var showAddIcon = function () { return numSelected == 0; };
@@ -33633,19 +33639,19 @@ var EnhancedTableToolbar = function (props) {
             showTitle() && React__namespace.createElement(Typography, { color: "primary", sx: { flex: '1 1 100%' }, variant: "h6", id: "tableTitle", component: "div" }, title),
             showEditIcon() && React__namespace.createElement(Tooltip, { title: "Edit" },
                 React__namespace.createElement(IconButton, { color: "primary", onClick: props.handleClickEdit },
-                    React__namespace.createElement(default_1$1, null))),
+                    React__namespace.createElement(default_1$3, null))),
             showDeleteIcon() && React__namespace.createElement(Tooltip, { title: "Delete" },
                 React__namespace.createElement(IconButton, { color: "primary", onClick: props.handleClickDelete },
-                    React__namespace.createElement(default_1$4, null))),
+                    React__namespace.createElement(default_1$6, null))),
             showAddIcon() && React__namespace.createElement(Tooltip, { title: "Add" },
                 React__namespace.createElement(IconButton, { color: "primary", onClick: props.handleClickAdd },
-                    React__namespace.createElement(default_1$2, null))),
+                    React__namespace.createElement(default_1$4, null))),
             showFilterIcon() && React__namespace.createElement(Tooltip, { title: "Filter list" },
                 React__namespace.createElement(IconButton, { color: "primary", onClick: props.handleClickFilter },
-                    React__namespace.createElement(default_1$3, null))),
+                    React__namespace.createElement(default_1$5, null))),
             showSettingsIcon() && React__namespace.createElement(Tooltip, { title: "Settings" },
                 React__namespace.createElement(IconButton, { color: "primary", onClick: props.handleClickSettings },
-                    React__namespace.createElement(default_1, null)))));
+                    React__namespace.createElement(default_1$2, null)))));
 };
 
 var ArrowDownwardIcon = createSvgIcon$1( /*#__PURE__*/require$$2.jsx("path", {
@@ -56756,7 +56762,13 @@ process.env.NODE_ENV !== "production" ? ToggleButtonGroup.propTypes
 } : void 0;
 
 var EnhancedTableHead = function (props) {
-    var _a = React.useState([]), columns = _a[0], setColumns = _a[1];
+    var _a = React.useState(false), multiSelection = _a[0], setMultiSelection = _a[1];
+    var _b = React.useState([]), columns = _b[0], setColumns = _b[1];
+    React.useEffect(function () {
+        if (props.multiSelection) {
+            setMultiSelection(props.multiSelection);
+        }
+    }, [props.multiSelection]);
     React.useEffect(function () {
         if (props.columns) {
             setColumns(props.columns);
@@ -56768,10 +56780,9 @@ var EnhancedTableHead = function (props) {
     return React__namespace.createElement(React__namespace.Fragment, null,
         React__namespace.createElement(TableHead, null,
             React__namespace.createElement(TableRow, null,
-                React__namespace.createElement(TableCell, { padding: "checkbox" },
-                    React__namespace.createElement(Checkbox, { color: "primary", indeterminate: props.numSelected > 0 && props.numSelected < props.rowCount, checked: props.rowCount > 0 && props.numSelected === props.rowCount, onChange: props.onSelectAllClick, inputProps: {
-                            'aria-label': 'select all desserts',
-                        } })),
+                React__namespace.createElement(TableCell, { padding: "checkbox" }, multiSelection && React__namespace.createElement(Checkbox, { color: "primary", indeterminate: props.numSelected > 0 && props.numSelected < props.rowCount, checked: props.rowCount > 0 && props.numSelected === props.rowCount, onChange: props.onSelectAllClick, inputProps: {
+                        'aria-label': 'select all desserts',
+                    } })),
                 columns.map(function (column) {
                     if (column.show) {
                         return React__namespace.createElement(TableCell, { key: column.id, align: column.align, padding: column.disablePadding ? 'none' : 'normal', sortDirection: props.orderBy === column.id ? props.order : false },
@@ -56783,14 +56794,26 @@ var EnhancedTableHead = function (props) {
 };
 
 var EnhancedTable = function (props) {
-    var _a = React.useState([]), columns = _a[0], setColumns = _a[1];
-    var _b = React.useState([]), rows = _b[0], setRows = _b[1];
-    var _c = React.useState('asc'), order = _c[0], setOrder = _c[1];
-    var _d = React.useState(), orderBy = _d[0], setOrderBy = _d[1];
-    var _e = React.useState([]), selected = _e[0], setSelected = _e[1];
-    var _f = React.useState(0), page = _f[0], setPage = _f[1];
-    var _g = React.useState(false), dense = _g[0], setDense = _g[1];
-    var _h = React.useState(5), rowsPerPage = _h[0], setRowsPerPage = _h[1];
+    var _a = React.useState(false), multiSelection = _a[0], setMultiSelection = _a[1];
+    var _b = React.useState([]), columns = _b[0], setColumns = _b[1];
+    var _c = React.useState([]), rows = _c[0], setRows = _c[1];
+    var _d = React.useState('asc'), order = _d[0], setOrder = _d[1];
+    var _e = React.useState(), orderBy = _e[0], setOrderBy = _e[1];
+    var _f = React.useState([]), selected = _f[0], setSelected = _f[1];
+    var _g = React.useState(0), page = _g[0], setPage = _g[1];
+    var _h = React.useState(false), dense = _h[0], setDense = _h[1];
+    var _j = React.useState(5), rowsPerPage = _j[0], setRowsPerPage = _j[1];
+    var _k = React.useState(100), width = _k[0], setWidth = _k[1];
+    React.useEffect(function () {
+        if (props.multiSelection) {
+            setMultiSelection(props.multiSelection);
+        }
+    }, [props.multiSelection]);
+    React.useEffect(function () {
+        if (props.width) {
+            setWidth(props.width);
+        }
+    }, [props.width]);
     React.useEffect(function () {
         if (props.columns) {
             setColumns(props.columns);
@@ -56819,13 +56842,12 @@ var EnhancedTable = function (props) {
     var handleSelectAllClick = function (event) {
         if (event.target.checked) {
             var newSelecteds = rows.map(function (n) { return n.id; });
-            debugger;
             setSelected(newSelecteds);
             return;
         }
         setSelected([]);
     };
-    var handleClick = function (event, id) {
+    var handleClickMulti = function (event, id) {
         var newSelected = [];
         var foundSelected = selected.find(function (x) { return x === id; });
         if (!foundSelected) {
@@ -56835,6 +56857,25 @@ var EnhancedTable = function (props) {
             newSelected = selected.filter(function (x) { return x != id; });
         }
         setSelected(newSelected);
+    };
+    var handleClickSingle = function (event, id) {
+        var newSelected = [];
+        var foundSelected = selected.find(function (x) { return x === id; });
+        if (!foundSelected) {
+            newSelected = [id];
+        }
+        else {
+            newSelected = [];
+        }
+        setSelected(newSelected);
+    };
+    var handleClick = function (event, id) {
+        if (multiSelection) {
+            handleClickMulti(event, id);
+        }
+        else {
+            handleClickSingle(event, id);
+        }
     };
     var handleChangePage = function (event, newPage) {
         setPage(newPage);
@@ -56852,11 +56893,11 @@ var EnhancedTable = function (props) {
         return (_a = foundColumn === null || foundColumn === void 0 ? void 0 : foundColumn.show) !== null && _a !== void 0 ? _a : false;
     };
     return React__namespace.createElement(React__namespace.Fragment, null,
-        React__namespace.createElement(Box, { sx: { width: '100%' } },
+        React__namespace.createElement(Box, { sx: { width: width + '%' } },
             React__namespace.createElement(Paper, { sx: { width: '100%', mb: 2 } },
-                React__namespace.createElement(EnhancedTableToolbar, { title: props.title, numSelected: selected.length, handleClickAdd: props.handleOpenAddDialog, handleClickEdit: props.handleOpenAddDialog, handleClickFilter: props.handleOpenFilterDialog, handleClickSettings: props.handleOpenSettingsDialog, handleClickDelete: props.handleOpenDeleteDialog }),
+                React__namespace.createElement(EnhancedTableToolbar, { multiSelection: multiSelection, title: props.title, numSelected: selected.length, handleClickAdd: props.handleOpenAddDialog, handleClickEdit: props.handleOpenAddDialog, handleClickFilter: props.handleOpenFilterDialog, handleClickSettings: props.handleOpenSettingsDialog, handleClickDelete: props.handleOpenDeleteDialog }),
                 React__namespace.createElement(TableContainer, null,
-                    React__namespace.createElement(Table, { sx: { minWidth: 750 }, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium' },
+                    React__namespace.createElement(Table, { "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium' },
                         React__namespace.createElement(EnhancedTableHead, { columns: columns, numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length }),
                         React__namespace.createElement(TableBody, null,
                             rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -56887,8 +56928,280 @@ var EnhancedTable = function (props) {
                 React__namespace.createElement(TablePagination, { rowsPerPageOptions: [5, 10, 25], component: "div", count: rows.length, rowsPerPage: rowsPerPage, page: page, onPageChange: handleChangePage, onRowsPerPageChange: handleChangeRowsPerPage }))));
 };
 
+var EnhancedTableToolbar2 = function (props) {
+    var _a = React.useState(false), multiSelection = _a[0], setMultiSelection = _a[1];
+    var _b = React.useState(''), title = _b[0], setTitle = _b[1];
+    var _c = React.useState(0), numSelected = _c[0], setNumSelected = _c[1];
+    React.useEffect(function () {
+        if (props.multiSelection) {
+            setMultiSelection(props.multiSelection);
+        }
+    }, [props.multiSelection]);
+    React.useEffect(function () {
+        if (props.numSelected != undefined) {
+            setNumSelected(props.numSelected);
+        }
+    }, [props.numSelected]);
+    React.useEffect(function () {
+        if (props.title) {
+            setTitle(props.title);
+        }
+    }, [props.title]);
+    var showTitle = function () { return numSelected == 0 || !multiSelection; };
+    var showCountSelected = function () { return numSelected > 0 && multiSelection; };
+    return React__namespace.createElement(React__namespace.Fragment, null,
+        React__namespace.createElement(Toolbar, { sx: __assign({ pl: { sm: 2 }, pr: { xs: 1, sm: 1 } }, (numSelected > 0 && {
+                bgColor: function (theme) {
+                    return alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity);
+                },
+            })) },
+            showCountSelected() && React__namespace.createElement(Typography, { sx: { flex: '1 1 100%' }, color: "inherit", variant: "subtitle1", component: "div" },
+                numSelected,
+                " selected"),
+            showTitle() && React__namespace.createElement(Typography, { color: "primary", sx: { flex: '1 1 100%' }, variant: "h6", id: "tableTitle", component: "div" }, title),
+            props.children));
+};
+
+var EnhancedTableBody = function (props) {
+    var _a = React.useState(false), multiSelection = _a[0], setMultiSelection = _a[1];
+    var _b = React.useState([]), columns = _b[0], setColumns = _b[1];
+    var _c = React.useState([]), rows = _c[0], setRows = _c[1];
+    var _d = React.useState('asc'), order = _d[0], setOrder = _d[1];
+    var _e = React.useState(), orderBy = _e[0], setOrderBy = _e[1];
+    var _f = React.useState([]), selected = _f[0], setSelected = _f[1];
+    var _g = React.useState(0), page = _g[0], setPage = _g[1];
+    var _h = React.useState(false), dense = _h[0], setDense = _h[1];
+    var _j = React.useState(5), rowsPerPage = _j[0], setRowsPerPage = _j[1];
+    var _k = React.useState(100); _k[0]; var setWidth = _k[1];
+    React.useEffect(function () {
+        if (props.multiSelection) {
+            setMultiSelection(props.multiSelection);
+        }
+    }, [props.multiSelection]);
+    React.useEffect(function () {
+        if (props.width) {
+            setWidth(props.width);
+        }
+    }, [props.width]);
+    React.useEffect(function () {
+        if (props.columns) {
+            setColumns(props.columns);
+        }
+    }, [props.columns]);
+    React.useEffect(function () {
+        if (props.dense != undefined) {
+            setDense(props.dense);
+        }
+    }, [props.dense]);
+    React.useEffect(function () {
+        if (props.rows) {
+            setRows(props.rows);
+        }
+    }, [props.rows]);
+    React.useEffect(function () {
+        if (selected != undefined) {
+            props.handleSelectRows(selected);
+        }
+    }, [selected]);
+    var handleRequestSort = function (event, property) {
+        var isAsc = orderBy === property && order === 'asc';
+        setOrder(isAsc ? 'desc' : 'asc');
+        setOrderBy(property);
+    };
+    var handleSelectAllClick = function (event) {
+        if (event.target.checked) {
+            var newSelecteds = rows.map(function (n) { return n.id; });
+            setSelected(newSelecteds);
+            return;
+        }
+        setSelected([]);
+    };
+    var handleClickMulti = function (event, id) {
+        var newSelected = [];
+        var foundSelected = selected.find(function (x) { return x === id; });
+        if (!foundSelected) {
+            newSelected = __spreadArray(__spreadArray([], selected, true), [id], false);
+        }
+        else {
+            newSelected = selected.filter(function (x) { return x != id; });
+        }
+        setSelected(newSelected);
+    };
+    var handleClickSingle = function (event, id) {
+        var newSelected = [];
+        var foundSelected = selected.find(function (x) { return x === id; });
+        if (!foundSelected) {
+            newSelected = [id];
+        }
+        else {
+            newSelected = [];
+        }
+        setSelected(newSelected);
+    };
+    var handleClick = function (event, id) {
+        if (multiSelection) {
+            handleClickMulti(event, id);
+        }
+        else {
+            handleClickSingle(event, id);
+        }
+    };
+    var handleChangePage = function (event, newPage) {
+        setPage(newPage);
+    };
+    var handleChangeRowsPerPage = function (event) {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+    var isSelected = function (id) { return !!selected.find(function (x) { return x === id; }); };
+    // Avoid a layout jump when reaching the last page with empty rows.
+    var emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    var showCell = function (cell) {
+        var _a;
+        var foundColumn = columns.find(function (x) { return x.id == cell.columnId; });
+        return (_a = foundColumn === null || foundColumn === void 0 ? void 0 : foundColumn.show) !== null && _a !== void 0 ? _a : false;
+    };
+    return React__namespace.createElement(React__namespace.Fragment, null,
+        React__namespace.createElement(TableContainer, null,
+            React__namespace.createElement(Table, { "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium' },
+                React__namespace.createElement(EnhancedTableHead, { columns: columns, numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length }),
+                React__namespace.createElement(TableBody, null,
+                    rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .map(function (row, index) {
+                        var isItemSelected = isSelected(row.id);
+                        var labelId = "enhanced-table-checkbox-".concat(index);
+                        return React__namespace.createElement(React__namespace.Fragment, null,
+                            React__namespace.createElement(TableRow, { hover: true, onClick: function (event) { return handleClick(event, row.id); }, role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, key: row.key, selected: isItemSelected },
+                                React__namespace.createElement(TableCell, { padding: "checkbox" },
+                                    React__namespace.createElement(Checkbox, { color: "primary", checked: isItemSelected, inputProps: {
+                                            'aria-labelledby': labelId,
+                                        } })),
+                                row.data.map(function (item) {
+                                    if (showCell(item)) {
+                                        if (item.type === TableCellType$1.Default) {
+                                            return item.value;
+                                        }
+                                        else {
+                                            return React__namespace.createElement(TableCell, null, item.value);
+                                        }
+                                    }
+                                })));
+                    }),
+                    emptyRows > 0 && (React__namespace.createElement(TableRow, { style: {
+                            height: (dense ? 33 : 53) * emptyRows,
+                        } },
+                        React__namespace.createElement(TableCell, { colSpan: 6 })))))),
+        React__namespace.createElement(TablePagination, { rowsPerPageOptions: [5, 10, 25], component: "div", count: rows.length, rowsPerPage: rowsPerPage, page: page, onPageChange: handleChangePage, onRowsPerPageChange: handleChangeRowsPerPage }));
+};
+
+var enhancedTableToCsv = function (columns, rows) {
+    var csvData = [];
+    csvData.push(columns.filter(function (x) { return x.show; }).map(function (x) { return x.label; }));
+    rows.map(function (row) {
+        var tmp = row.data.map(function (x) {
+            var foundColumn = columns.find(function (c) { return x.columnId == c.id; });
+            if (foundColumn && foundColumn.show) {
+                return x.value;
+            }
+        });
+        csvData.push(tmp.filter(function (x) { return x != undefined; }));
+    });
+    return csvData;
+};
+
+var DoneOutline = {};
+
+var _interopRequireDefault$1 = interopRequireDefault.exports;
+
+Object.defineProperty(DoneOutline, "__esModule", {
+  value: true
+});
+var default_1$1 = DoneOutline.default = void 0;
+
+var _createSvgIcon$1 = _interopRequireDefault$1(requireCreateSvgIcon());
+
+var _jsxRuntime$1 = require$$2__default["default"];
+
+var _default$1 = (0, _createSvgIcon$1.default)( /*#__PURE__*/(0, _jsxRuntime$1.jsx)("path", {
+  d: "m19.77 5.03 1.4 1.4L8.43 19.17l-5.6-5.6 1.4-1.4 4.2 4.2L19.77 5.03m0-2.83L8.43 13.54l-4.2-4.2L0 13.57 8.43 22 24 6.43 19.77 2.2z"
+}), 'DoneOutline');
+
+default_1$1 = DoneOutline.default = _default$1;
+
+var Close = {};
+
+var _interopRequireDefault = interopRequireDefault.exports;
+
+Object.defineProperty(Close, "__esModule", {
+  value: true
+});
+var default_1 = Close.default = void 0;
+
+var _createSvgIcon = _interopRequireDefault(requireCreateSvgIcon());
+
+var _jsxRuntime = require$$2__default["default"];
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+}), 'Close');
+
+default_1 = Close.default = _default;
+
+var FilterOptionType;
+(function (FilterOptionType) {
+    FilterOptionType[FilterOptionType["all"] = 0] = "all";
+    FilterOptionType[FilterOptionType["yes"] = 1] = "yes";
+    FilterOptionType[FilterOptionType["no"] = 2] = "no";
+})(FilterOptionType || (FilterOptionType = {}));
+
+var FilterOption = function (props) {
+    var initState = function (options) {
+        if (options === FilterOptionType.all) {
+            return ['yes', 'no'];
+        }
+        else if (options === FilterOptionType.yes) {
+            return ['yes'];
+        }
+        else if (options === FilterOptionType.no) {
+            return ['no'];
+        }
+    };
+    var _a = React__namespace.useState(initState(props.options)), options = _a[0], setOptions = _a[1];
+    var _b = React.useState(FilterOptionType.all), filter = _b[0]; _b[1];
+    React.useEffect(function () {
+        if (options) {
+            var yes = options.find(function (x) { return x === 'yes'; });
+            var no = options.find(function (x) { return x === 'no'; });
+            var newFilter = filter;
+            if (yes && no) {
+                newFilter = FilterOptionType.all;
+            }
+            else if (yes) {
+                newFilter = FilterOptionType.yes;
+            }
+            else if (no) {
+                newFilter = FilterOptionType.no;
+            }
+            props.onChange(newFilter);
+        }
+    }, [options]);
+    var handleChange = function (event, newOptions) {
+        setOptions(newOptions);
+    };
+    return React__namespace.createElement(React__namespace.Fragment, null,
+        React__namespace.createElement(ToggleButtonGroup, { value: options, onChange: handleChange, "aria-label": "text formatting", color: "primary" },
+            React__namespace.createElement(ToggleButton, { value: 'yes', "aria-label": "yes" },
+                React__namespace.createElement(default_1$1, null)),
+            React__namespace.createElement(ToggleButton, { value: 'no', "aria-label": "no" },
+                React__namespace.createElement(default_1, null))));
+};
+
 exports.EnhancedTable = EnhancedTable;
+exports.EnhancedTableBody = EnhancedTableBody;
 exports.EnhancedTableHead = EnhancedTableHead;
 exports.EnhancedTableToolbar = EnhancedTableToolbar;
+exports.EnhancedTableToolbar2 = EnhancedTableToolbar2;
+exports.FilterOption = FilterOption;
 exports.TableCellType = TableCellType$1;
+exports.enhancedTableToCsv = enhancedTableToCsv;
 //# sourceMappingURL=index.js.map

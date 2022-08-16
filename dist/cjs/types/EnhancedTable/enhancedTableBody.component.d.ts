@@ -6,12 +6,12 @@ interface Props {
     columns?: ITableColumn[];
     rows?: any[];
     dense?: boolean;
-    handleOpenAddDialog(): void;
+    handleOpenAddDialog?(): void;
     handleOpenFilterDialog?(): void;
     handleOpenSettingsDialog?(): void;
     handleOpenDeleteDialog?(): void;
     handleSelectRows(selected: number[]): void;
     width?: number;
 }
-declare const EnhancedTable: FC<Props>;
-export default EnhancedTable;
+declare const EnhancedTableBody: FC<Props>;
+export default EnhancedTableBody;

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 interface Props {
+    multiSelection?: boolean;
     title?: string;
     numSelected: number;
     handleClickAdd?(): void;
