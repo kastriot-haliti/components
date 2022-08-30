@@ -4,7 +4,8 @@ declare enum TableCellType {
     Default = 0,
     Text = 1,
     Number = 2,
-    Select = 3
+    Select = 3,
+    Actions = 4
 }
 
 interface ITableColumn {
@@ -18,6 +19,15 @@ interface ITableColumn {
     show: boolean;
 }
 
+declare enum ActionType {
+    delete = "delete",
+    edit = "edit",
+    checkin = "checkin",
+    checkout = "checkout",
+    cancel = "cancel",
+    details = "details"
+}
+
 interface Props$5 {
     multiSelection?: boolean;
     title?: string;
@@ -29,7 +39,10 @@ interface Props$5 {
     handleOpenSettingsDialog?(): void;
     handleOpenDeleteDialog?(): void;
     handleSelectRows(selected: number[]): void;
+    handleExport?(type: string): void;
+    handleAction?(action: ActionType, item: any): void;
     width?: number;
+    rowsPerPage?: number;
 }
 declare const EnhancedTable: FC<Props$5>;
 
@@ -42,6 +55,7 @@ interface Props$4 {
     handleClickDelete?(): void;
     handleClickFilter?(): void;
     handleClickSettings?(): void;
+    handleExport?(type: string): void;
 }
 declare const EnhancedTableToolbar: FC<Props$4>;
 
@@ -81,7 +95,7 @@ interface Props$1 {
     handleOpenFilterDialog?(): void;
     handleOpenSettingsDialog?(): void;
     handleOpenDeleteDialog?(): void;
-    handleSelectRows(selected: number[]): void;
+    handleSelectRows?(selected: number[]): void;
     width?: number;
 }
 declare const EnhancedTableBody: FC<Props$1>;
@@ -116,4 +130,4 @@ interface Props {
 }
 declare const FilterOption: FC<Props>;
 
-export { EnhancedTable, EnhancedTableBody, EnhancedTableHead, EnhancedTableToolbar, EnhancedTableToolbar2, FilterOption, ITableCell, ITableColumn, ITableRow, TableCellType, enhancedTableToCsv };
+export { ActionType, EnhancedTable, EnhancedTableBody, EnhancedTableHead, EnhancedTableToolbar, EnhancedTableToolbar2, FilterOption, ITableCell, ITableColumn, ITableRow, TableCellType, enhancedTableToCsv };

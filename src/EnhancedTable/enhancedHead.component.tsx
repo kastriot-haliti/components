@@ -42,7 +42,9 @@ const EnhancedTableHead:FC<Props> = (props: Props) => {
       };
 
   return <>
-      <TableHead>
+      <TableHead
+        style={{backgroundColor: 'whitesmoke', height: '50px'}}
+      >
         <TableRow>
           <TableCell padding="checkbox">
             {multiSelection && <Checkbox
@@ -62,6 +64,7 @@ const EnhancedTableHead:FC<Props> = (props: Props) => {
                     align={column.align}
                     padding={column.disablePadding ? 'none' : 'normal'}
                     sortDirection={props.orderBy === column.id ? props.order : false}
+                    size={'medium'}
                 >
                   <TableSortLabel
                       active={props.orderBy === column.id}

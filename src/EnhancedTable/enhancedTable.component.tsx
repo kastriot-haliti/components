@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {FC, useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,14 +9,22 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import {FC, useEffect, useState} from 'react';
 import ITableColumn from '../types/ITableColumn.interface';
 import ITableRow from '../types/ITableRow.interface';
 import TableCellType from '../enums/tableCellType.enum';
 import ITableCell from '../types/ITableCell.interface';
 import EnhancedTableToolbar from './enhancedTableToolbar.component';
 import EnhancedTableHead from './enhancedHead.component';
-
+import {IconButton, Menu, MenuItem} from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ActionType from '../enums/action-type.enum';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ClearIcon from '@mui/icons-material/Clear';
+import jspdf from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import enhancedTableToCsv from '../functions/enhancedTableToCsv';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -71,7 +80,10 @@ interface Props {
   handleOpenSettingsDialog?(): void;
   handleOpenDeleteDialog?(): void;
   handleSelectRows(selected: number[]): void;
-  width?: number
+  handleExport?(type: string): void;
+  handleAction?(action: ActionType,item: any): void;
+  width?: number,
+  rowsPerPage?: number
 }
 
 type Order = 'asc' | 'desc';
@@ -84,9 +96,10 @@ const EnhancedTable:FC<Props> = (props) => {
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof ITableColumn>();
   const [selected, setSelected] = useState<number[]>([]);
+  const [actionId,setActionId] = useState<number>(0);
   const [page, setPage] = useState(0);
-  const [dense, setDense] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [dense, setDense] = useState(true);
+  const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage ?? 25);
   const [width,setWidth] = useState<number>(100);
 
   useEffect(() => {
@@ -141,7 +154,7 @@ const EnhancedTable:FC<Props> = (props) => {
     setSelected([]);
   };
 
-  const handleClickMulti = (event: React.MouseEvent<unknown>,id: number) => {
+  const handleClickMulti = (id: number) => {
     let newSelected: any[] = []
     const foundSelected = selected.find(x => x === id);
     if(!foundSelected) {
@@ -153,7 +166,7 @@ const EnhancedTable:FC<Props> = (props) => {
     setSelected(newSelected);
   }
 
-  const handleClickSingle = (event: React.MouseEvent<unknown>,id: number) => {
+  const handleClickSingle = (id: number) => {
     let newSelected: any[] = [];
     const foundSelected = selected.find(x => x === id);
     if(!foundSelected) {
@@ -164,11 +177,11 @@ const EnhancedTable:FC<Props> = (props) => {
     setSelected(newSelected);
   }
 
-  const handleClick = (event: React.MouseEvent<unknown>,id: number) => {
+  const handleClick = (id: number) => {
     if(multiSelection) {
-      handleClickMulti(event,id);
+      handleClickMulti(id);
     }else{
-      handleClickSingle(event,id);
+      handleClickSingle(id);
     }
   };
 
@@ -183,6 +196,8 @@ const EnhancedTable:FC<Props> = (props) => {
 
   const isSelected = (id: number) => !!selected.find(x => x === id);
 
+  const openActionMenu = (id: number) => id === actionId;
+
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -190,6 +205,113 @@ const EnhancedTable:FC<Props> = (props) => {
   const showCell = (cell: ITableCell): boolean => {
     let foundColumn = columns.find(x => x.id == cell.columnId);
     return foundColumn?.show ?? false;
+  }
+
+  const [anchorActionMenu, setAnchorActionMenu] = React.useState<null | HTMLElement>(null);
+  const handleOpenAction = (event: React.MouseEvent<HTMLButtonElement>,id: number) => {
+    setAnchorActionMenu(event.currentTarget);
+    setActionId(id);
+  }
+  const handleCloseAction = () => {
+    setAnchorActionMenu(null);
+    setActionId(0);
+  }
+
+ /*  const [anchorActionMenu, setAnchorActionMenu] = React.useState<null | HTMLElement>(null);
+  // const openActionMenu = Boolean(anchorActionMenu);
+  const handleMenuClickOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorActionMenu(event.currentTarget);
+  };
+  const handleMenuClickClose = () => {
+    setAnchorActionMenu(null);
+  };*/
+
+  const handleDeleteAction = (id: number) => {
+    handleCloseAction();
+    if(props.handleAction) {
+      props.handleAction(ActionType.delete, id)
+    }
+  }
+  const handleEditAction = (id: number) => {
+    handleCloseAction();
+    if(props.handleAction) {
+      props.handleAction(ActionType.edit, id)
+    }
+  }
+  const handleCheckinAction = (id: number) => {
+    handleCloseAction();
+    if(props.handleAction) {
+      props.handleAction(ActionType.checkin, actionId)
+    }
+  }
+  const handleCheckoutAction = (id: number) => {
+    handleCloseAction();
+    if(props.handleAction) {
+      props.handleAction(ActionType.checkout, actionId)
+    }
+  }
+  const handleCancelAction = (id: number) => {
+    handleCloseAction();
+    if(props.handleAction) {
+      props.handleAction(ActionType.cancel, actionId)
+    }
+  }
+
+  /*const exportCsv = (data: any[], fileName: string = 'export') => {
+    let csv = '';
+
+    data.forEach(function(row) {
+      csv += row.join(',');
+      csv += "\n";
+    });
+
+    let hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '';
+
+    hiddenElement.download = fileName + '.csv';
+    hiddenElement.click();
+  }
+
+  const handleCsv = (fileName='download') => {
+    let csvData = enhancedTableToCsv(columns,rows);
+
+    exportCsv(csvData,fileName);
+  }
+
+  const handlePdf = (fileName='download') => {
+    fileName = fileName + '.pdf';
+    const pdf = new jspdf();
+
+    let head = [];
+    let body: any[][] = [];
+
+    head.push(columns.filter(x => x.show && x.type != TableCellType.Default && x.id != 'columnId').map(x => x.label));
+    rows.map((row) => {
+      let tmp = row.data.map(x => {
+        let foundColumn = columns.find(c => x.columnId == c.id);
+        if(foundColumn && foundColumn.show && foundColumn.type != TableCellType.Default && foundColumn.id != 'columnId') {
+          return x.value
+        }
+      })
+      body.push(tmp.filter(x => x != undefined))
+    })
+
+    autoTable(pdf, {
+      head: head,
+      body: body,
+    })
+
+    pdf.save(fileName);
+  }*/
+
+  const handleExport = (type: string) => {
+    if(type === 'csv') {
+      // handleCsv();
+    }
+    else if (type === 'pdf') {
+      // handlePdf();
+    }
   }
 
   return <>
@@ -202,6 +324,7 @@ const EnhancedTable:FC<Props> = (props) => {
                                 handleClickFilter={props.handleOpenFilterDialog}
                                 handleClickSettings={props.handleOpenSettingsDialog}
                                 handleClickDelete={props.handleOpenDeleteDialog}
+                                handleExport={props.handleExport}
           />
           <TableContainer>
             <Table
@@ -229,7 +352,6 @@ const EnhancedTable:FC<Props> = (props) => {
                       return <>
                           <TableRow
                               hover
-                              onClick={(event) => handleClick(event, row.id)}
                               role="checkbox"
                               aria-checked={isItemSelected}
                               tabIndex={-1}
@@ -238,6 +360,7 @@ const EnhancedTable:FC<Props> = (props) => {
                           >
                             <TableCell padding="checkbox">
                               <Checkbox
+                                  onClick={(event) => handleClick(row.id)}
                                   color="primary"
                                   checked={isItemSelected}
                                   inputProps={{
@@ -249,6 +372,25 @@ const EnhancedTable:FC<Props> = (props) => {
                               if(showCell(item)) {
                                 if (item.type === TableCellType.Default) {
                                   return item.value;
+                                } else if(item.type === TableCellType.Actions) {
+                                  return <TableCell align={item.align}>
+                                    <IconButton onClick={(el) => handleOpenAction(el,row.id)}> <MoreVertIcon /> </IconButton>
+                                    <Menu
+                                        id="basic-menu"
+                                        anchorEl={anchorActionMenu}
+                                        open={openActionMenu(row.id)}
+                                        onClose={handleCloseAction}
+                                        MenuListProps={{
+                                          'aria-labelledby': 'basic-button',
+                                        }}
+                                    >
+                                      {(item.value as ActionType[])?.includes(ActionType.delete) && <MenuItem value={ActionType.delete} onClick={() => handleDeleteAction(row.id)}> <DeleteIcon color={"primary"} /> Delete</MenuItem>}
+                                      {(item.value as ActionType[])?.includes(ActionType.edit) && <MenuItem value={ActionType.edit} onClick={() => handleEditAction(row.id)}> <EditIcon color={"primary"} /> Edit</MenuItem>}
+                                      {(item.value as ActionType[])?.includes(ActionType.checkin) && <MenuItem value={ActionType.checkin} onClick={() => handleCheckinAction(row.id)}> <PlaylistAddCheckIcon color={"primary"} /> Check IN</MenuItem>}
+                                      {(item.value as ActionType[])?.includes(ActionType.checkout) && <MenuItem value={ActionType.checkout} onClick={() => handleCheckoutAction(row.id)}> <PlaylistAddCheckIcon color={"primary"} /> Check OUT</MenuItem>}
+                                      {(item.value as ActionType[])?.includes(ActionType.cancel) && <MenuItem value={ActionType.cancel} onClick={() => handleCancelAction(row.id)}> <ClearIcon color={"primary"} /> Cancel</MenuItem>}
+                                    </Menu>
+                                  </TableCell>
                                 } else {
                                   return <TableCell>{item.value}</TableCell>
                                 }

@@ -1,19 +1,19 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import {FC, useEffect, useState} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import {FC, useEffect, useState} from 'react';
 import ITableColumn from '../types/ITableColumn.interface';
 import ITableRow from '../types/ITableRow.interface';
 import TableCellType from '../enums/tableCellType.enum';
 import ITableCell from '../types/ITableCell.interface';
 import EnhancedTableHead from './enhancedHead.component';
+import {IconButton, Menu} from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 interface Props {
   multiSelection?: boolean,
@@ -73,7 +73,7 @@ const EnhancedTableBody:FC<Props> = (props) => {
   },[props.rows])
 
   useEffect(() => {
-    if(selected != undefined) {
+    if(selected != undefined && props.handleSelectRows != undefined) {
       props.handleSelectRows(selected)
     }
   },[selected])
@@ -147,6 +147,16 @@ const EnhancedTableBody:FC<Props> = (props) => {
     return foundColumn?.show ?? false;
   }
 
+
+  const [anchorActionMenu, setAnchorActionMenu] = React.useState<null | HTMLElement>(null);
+  const openActionMenu = Boolean(anchorActionMenu);
+  const handleMenuClickOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorActionMenu(event.currentTarget);
+  };
+  const handleMenuClickClose = () => {
+    setAnchorActionMenu(null);
+  };
+
   return <>
         <TableContainer>
           <Table
@@ -172,7 +182,6 @@ const EnhancedTableBody:FC<Props> = (props) => {
                     return <>
                       <TableRow
                           hover
-                          onClick={(event) => handleClick(event, row.id)}
                           role="checkbox"
                           aria-checked={isItemSelected}
                           tabIndex={-1}
@@ -181,6 +190,7 @@ const EnhancedTableBody:FC<Props> = (props) => {
                       >
                         <TableCell padding="checkbox">
                           <Checkbox
+                              onClick={(event) => handleClick(event, row.id)}
                               color="primary"
                               checked={isItemSelected}
                               inputProps={{
@@ -192,8 +202,24 @@ const EnhancedTableBody:FC<Props> = (props) => {
                           if(showCell(item)) {
                             if (item.type === TableCellType.Default) {
                               return item.value;
-                            } else {
-                              return <TableCell>{item.value}</TableCell>
+                            } else if(item.type === TableCellType.Actions) {
+                              return <TableCell align={item.align}>
+                                  <IconButton onClick={handleMenuClickOpen}> <MoreVertIcon /> </IconButton>
+                                <Menu
+                                    id="basic-menu"
+                                    anchorEl={anchorActionMenu}
+                                    open={openActionMenu}
+                                    onClose={handleMenuClickClose}
+                                    MenuListProps={{
+                                      'aria-labelledby': 'basic-button',
+                                    }}
+                                >
+                                  {item.value}
+                                </Menu>
+                              </TableCell>
+                            }
+                            else {
+                              return <TableCell align={item.align}>{item.value}</TableCell>
                             }
                           }
                         })}

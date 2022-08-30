@@ -11,6 +11,7 @@ export { default as ITableCell } from './types/ITableCell.interface';
 export { default as ITableColumn } from './types/ITableColumn.interface';
 
 export { default as TableCellType } from './enums/tableCellType.enum';
+export { default as ActionType } from './enums/action-type.enum';
 
 export { ITableRow };
 

@@ -2,7 +2,8 @@ enum TableCellType {
   Default,
   Text,
   Number,
-  Select
+  Select,
+  Actions
 }
 
 export default TableCellType;

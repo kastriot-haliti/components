@@ -10,6 +10,8 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {useEffect, useState,FC} from 'react';
+import {Button, Menu, MenuItem} from '@mui/material';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 interface Props {
   multiSelection?: boolean,
@@ -23,6 +25,7 @@ interface Props {
   handleClickDelete?(): void;
   handleClickFilter?(): void;
   handleClickSettings?(): void;
+  handleExport?(type: string): void;
 }
 
 const EnhancedTableToolbar: FC<Props> = (props: Props) => {
@@ -55,6 +58,33 @@ const EnhancedTableToolbar: FC<Props> = (props: Props) => {
   const showEditIcon = () => numSelected == 1
   const showDeleteIcon = () => numSelected > 0
 
+  const [anchorExportMenu, setAnchorExportMenu] = React.useState<null | HTMLElement>(null);
+  const openExportMenu = Boolean(anchorExportMenu);
+  const handleExportClickOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorExportMenu(event.currentTarget);
+  };
+  const handleExportClickClose = () => {
+    setAnchorExportMenu(null);
+  };
+
+  const exportCsv = () => {
+    handleExportClickClose()
+    if(props.handleExport)
+    props.handleExport('csv')
+  }
+
+  const exportPdf = () => {
+    handleExportClickClose()
+    if(props.handleExport)
+    props.handleExport('pdf')
+  }
+
+  const print = () => {
+    handleExportClickClose()
+    if(props.handleExport)
+    props.handleExport('print')
+  }
+
   return <>
       <Toolbar
           sx={{
@@ -66,26 +96,35 @@ const EnhancedTableToolbar: FC<Props> = (props: Props) => {
             }),
           }}
       >
-        {showCountSelected() && <Typography
-            sx={{ flex: '1 1 100%' }}
-            color="inherit"
-            variant="subtitle1"
-            component="div"
-        >
-          {numSelected} selected
-        </Typography>}
+        <div style={{display: 'flex'}}>
+          {showCountSelected() && <Typography
+              sx={{ flex: '1 1 100%' }}
+              color="inherit"
+              variant="subtitle1"
+              component="div"
+          >
+            {numSelected} selected
+          </Typography>}
 
-        {showTitle() && <Typography
-            color="primary"
-            sx={{ flex: '1 1 100%' }}
-            variant="h6"
-            id="tableTitle"
-            component="div"
-        >
-          {title}
-        </Typography>}
+          {showTitle() && <Typography
+              color="primary"
+              sx={{ flex: '1 1 100%' }}
+              variant="h6"
+              id="tableTitle"
+              component="div"
+          >
+            {title}
+          </Typography>}
 
-        {showEditIcon() && <Tooltip title="Edit">
+          {showAddIcon() &&
+            <Button color={"primary"} onClick={props.handleClickAdd} variant="contained" size="small" style={{ marginLeft: 'auto'}}>
+              <AddIcon />
+              <Typography >Add</Typography>
+            </Button>}
+        </div>
+
+
+{/*        {showEditIcon() && <Tooltip title="Edit">
           <IconButton color="primary" onClick={props.handleClickEdit}>
             <EditIcon />
           </IconButton>
@@ -95,13 +134,24 @@ const EnhancedTableToolbar: FC<Props> = (props: Props) => {
           <IconButton color="primary" onClick={props.handleClickDelete}>
             <DeleteIcon />
           </IconButton>
-        </Tooltip>}
+        </Tooltip>}*/}
 
-        {showAddIcon() && <Tooltip title="Add">
-          <IconButton color="primary" onClick={props.handleClickAdd}>
-            <AddIcon />
-          </IconButton>
-        </Tooltip>}
+
+        <div style={{display: 'flex',marginLeft: 'auto'}}>
+        <IconButton color="primary" onClick={handleExportClickOpen}><FileDownloadIcon /></IconButton>
+        <Menu
+            id="basic-menu"
+            anchorEl={anchorExportMenu}
+            open={openExportMenu}
+            onClose={handleExportClickClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+        >
+          <MenuItem value={'csv'} onClick={exportCsv}>Download as CSV</MenuItem>
+          <MenuItem value={'pdf'} onClick={exportPdf}>Download as Pdf</MenuItem>
+          <MenuItem value={'print'} onClick={print}>Print</MenuItem>
+        </Menu>
 
         {showFilterIcon() && <Tooltip title="Filter list">
           <IconButton color="primary" onClick={props.handleClickFilter}>
@@ -114,6 +164,7 @@ const EnhancedTableToolbar: FC<Props> = (props: Props) => {
             <SettingsIcon />
           </IconButton>
         </Tooltip>}
+        </div>
       </Toolbar>
   </>;
 };

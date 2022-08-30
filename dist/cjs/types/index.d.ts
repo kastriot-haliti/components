@@ -8,5 +8,6 @@ import { default as ITableRow } from './types/ITableRow.interface';
 export { default as ITableCell } from './types/ITableCell.interface';
 export { default as ITableColumn } from './types/ITableColumn.interface';
 export { default as TableCellType } from './enums/tableCellType.enum';
+export { default as ActionType } from './enums/action-type.enum';
 export { ITableRow };
 export { default as FilterOption } from './filter-option.component';

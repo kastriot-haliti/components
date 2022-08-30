@@ -27,6 +27,8 @@
     "@rollup/plugin-typescript": "^8.3.3",
     "@types/node": "^18.0.3",
     "rollup": "^2.76.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.25",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
