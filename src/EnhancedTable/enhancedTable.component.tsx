@@ -346,6 +346,7 @@ const EnhancedTable:FC<Props> = (props) => {
                 {/*{stableSort(rows, getComparator(order, orderBy))*/}
                 {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
+
                       const isItemSelected = isSelected(row.id);
                       const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -371,7 +372,7 @@ const EnhancedTable:FC<Props> = (props) => {
                             {row.data.map((item)=>{
                               if(showCell(item)) {
                                 if (item.type === TableCellType.Default) {
-                                  return item.value;
+                                  return item.displayValue ? item.displayValue : item.value;
                                 } else if(item.type === TableCellType.Actions) {
                                   return <TableCell align={item.align}>
                                     <IconButton onClick={(el) => handleOpenAction(el,row.id)}> <MoreVertIcon /> </IconButton>
@@ -392,7 +393,7 @@ const EnhancedTable:FC<Props> = (props) => {
                                     </Menu>
                                   </TableCell>
                                 } else {
-                                  return <TableCell>{item.value}</TableCell>
+                                  return <TableCell>{item.displayValue ? item.displayValue : item.value}</TableCell>
                                 }
                               }
                             })}

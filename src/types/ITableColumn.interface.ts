@@ -8,7 +8,8 @@ interface ITableColumn {
   format?: (value: number) => string;
   type?: TableCellType;
   disablePadding: boolean;
-  show: boolean
+  show: boolean;
+  excludeFromExport?: boolean
 }
 
 export default ITableColumn;
