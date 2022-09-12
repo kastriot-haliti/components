@@ -7,7 +7,7 @@ interface Props {
     handleClickEdit?(): void;
     handleClickDelete?(): void;
     handleClickFilter?(): void;
-    handleClickSettings?(): void;
+    handleClickSettings?(event: any): void;
     handleExport?(type: string): void;
 }
 declare const EnhancedTableToolbar: FC<Props>;
