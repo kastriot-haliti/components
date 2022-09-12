@@ -77,7 +77,7 @@ interface Props {
   dense?: boolean;
   handleOpenAddDialog(): void;
   handleOpenFilterDialog?(): void;
-  handleOpenSettingsDialog?(): void;
+  handleOpenSettingsDialog?(e:any): void;
   handleOpenDeleteDialog?(): void;
   handleSelectRows(selected: number[]): void;
   handleExport?(type: string): void;

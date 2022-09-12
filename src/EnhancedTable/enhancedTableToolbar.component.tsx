@@ -24,7 +24,7 @@ interface Props {
 
   handleClickDelete?(): void;
   handleClickFilter?(): void;
-  handleClickSettings?(): void;
+  handleClickSettings?(event: any): void;
   handleExport?(type: string): void;
 }
 
