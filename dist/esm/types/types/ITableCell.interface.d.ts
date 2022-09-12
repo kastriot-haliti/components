@@ -6,6 +6,7 @@ interface ITableCell {
     format?: (value: number) => string;
     type?: TableCellType;
     value: string | any;
+    displayValue: string | any;
     columnId: string;
 }
 export default ITableCell;

@@ -57050,11 +57050,9 @@ var EnhancedTable = function (props) {
                                             var _a, _b, _c, _d, _e;
                                             if (showCell(item)) {
                                                 if (item.type === TableCellType$1.Default) {
-                                                    return item.value;
+                                                    return item.displayValue ? item.displayValue : item.value;
                                                 }
                                                 else if (item.type === TableCellType$1.Actions) {
-                                                    console.log(row.id);
-                                                    debugger;
                                                     return React.createElement(TableCell, { align: item.align },
                                                         React.createElement(IconButton, { onClick: function (el) { return handleOpenAction(el, row.id); } },
                                                             " ",
@@ -57085,7 +57083,7 @@ var EnhancedTable = function (props) {
                                                                 " Cancel")));
                                                 }
                                                 else {
-                                                    return React.createElement(TableCell, null, item.value);
+                                                    return React.createElement(TableCell, null, item.displayValue ? item.displayValue : item.value);
                                                 }
                                             }
                                         })));
@@ -57283,11 +57281,11 @@ var EnhancedTableBody = function (props) {
 
 var enhancedTableToCsv = function (columns, rows) {
     var csvData = [];
-    csvData.push(columns.filter(function (x) { return x.show; }).map(function (x) { return x.label; }));
+    csvData.push(columns.filter(function (x) { return x.show && !x.excludeFromExport; }).map(function (x) { return x.label; }));
     rows.map(function (row) {
         var tmp = row.data.map(function (x) {
             var foundColumn = columns.find(function (c) { return x.columnId == c.id; });
-            if (foundColumn && foundColumn.show && foundColumn.type != TableCellType$1.Default) {
+            if (foundColumn && foundColumn.show && foundColumn.type != TableCellType$1.Default && !foundColumn.excludeFromExport) {
                 return x.value;
             }
         });

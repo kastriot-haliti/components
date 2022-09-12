@@ -17,6 +17,7 @@ interface ITableColumn {
     type?: TableCellType;
     disablePadding: boolean;
     show: boolean;
+    excludeFromExport?: boolean;
 }
 
 declare enum ActionType {
@@ -107,6 +108,7 @@ interface ITableCell {
     format?: (value: number) => string;
     type?: TableCellType;
     value: string | any;
+    displayValue: string | any;
     columnId: string;
 }
 

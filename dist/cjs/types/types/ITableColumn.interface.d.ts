@@ -8,5 +8,6 @@ interface ITableColumn {
     type?: TableCellType;
     disablePadding: boolean;
     show: boolean;
+    excludeFromExport?: boolean;
 }
 export default ITableColumn;
