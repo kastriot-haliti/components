@@ -5,7 +5,7 @@ import TableCellType from '../enums/tableCellType.enum';
 
 const enhancedTableToCsv = (columns: ITableColumn[],rows: ITableRow[]) => {
   let csvData = [];
-  csvData.push(columns.filter(x => x.show && x.excludeFromExport).map(x => x.label));
+  csvData.push(columns.filter(x => x.show && !x.excludeFromExport).map(x => x.label));
   rows.map((row) => {
     let tmp = row.data.map(x => {
       let foundColumn = columns.find(c => x.columnId == c.id);

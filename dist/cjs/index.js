@@ -57309,7 +57309,7 @@ var EnhancedTableBody = function (props) {
 
 var enhancedTableToCsv = function (columns, rows) {
     var csvData = [];
-    csvData.push(columns.filter(function (x) { return x.show && x.excludeFromExport; }).map(function (x) { return x.label; }));
+    csvData.push(columns.filter(function (x) { return x.show && !x.excludeFromExport; }).map(function (x) { return x.label; }));
     rows.map(function (row) {
         var tmp = row.data.map(function (x) {
             var foundColumn = columns.find(function (c) { return x.columnId == c.id; });
