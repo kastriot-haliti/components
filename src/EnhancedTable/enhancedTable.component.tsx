@@ -79,7 +79,7 @@ interface Props {
   handleOpenFilterDialog?(): void;
   handleOpenSettingsDialog?(e:any): void;
   handleOpenDeleteDialog?(): void;
-  handleSelectRows(selected: number[]): void;
+  handleSelectRows(selected: string[]): void;
   handleExport?(type: string): void;
   handleAction?(action: ActionType,item: any): void;
   width?: number,
@@ -95,8 +95,8 @@ const EnhancedTable:FC<Props> = (props) => {
 
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof ITableColumn>();
-  const [selected, setSelected] = useState<number[]>([]);
-  const [actionId,setActionId] = useState<number>(0);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [actionId,setActionId] = useState<string>('');
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(true);
   const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage ?? 25);
@@ -154,7 +154,7 @@ const EnhancedTable:FC<Props> = (props) => {
     setSelected([]);
   };
 
-  const handleClickMulti = (id: number) => {
+  const handleClickMulti = (id: string) => {
     let newSelected: any[] = []
     const foundSelected = selected.find(x => x === id);
     if(!foundSelected) {
@@ -166,7 +166,7 @@ const EnhancedTable:FC<Props> = (props) => {
     setSelected(newSelected);
   }
 
-  const handleClickSingle = (id: number) => {
+  const handleClickSingle = (id: string) => {
     let newSelected: any[] = [];
     const foundSelected = selected.find(x => x === id);
     if(!foundSelected) {
@@ -177,7 +177,7 @@ const EnhancedTable:FC<Props> = (props) => {
     setSelected(newSelected);
   }
 
-  const handleClick = (id: number) => {
+  const handleClick = (id: string) => {
     if(multiSelection) {
       handleClickMulti(id);
     }else{
@@ -194,9 +194,9 @@ const EnhancedTable:FC<Props> = (props) => {
     setPage(0);
   };
 
-  const isSelected = (id: number) => !!selected.find(x => x === id);
+  const isSelected = (id: string) => !!selected.find(x => x === id);
 
-  const openActionMenu = (id: number) => id === actionId;
+  const openActionMenu = (id: string) => id === actionId;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -208,13 +208,13 @@ const EnhancedTable:FC<Props> = (props) => {
   }
 
   const [anchorActionMenu, setAnchorActionMenu] = React.useState<null | HTMLElement>(null);
-  const handleOpenAction = (event: React.MouseEvent<HTMLButtonElement>,id: number) => {
+  const handleOpenAction = (event: React.MouseEvent<HTMLButtonElement>,id: string) => {
     setAnchorActionMenu(event.currentTarget);
     setActionId(id);
   }
   const handleCloseAction = () => {
     setAnchorActionMenu(null);
-    setActionId(0);
+    setActionId('');
   }
 
  /*  const [anchorActionMenu, setAnchorActionMenu] = React.useState<null | HTMLElement>(null);
@@ -226,31 +226,31 @@ const EnhancedTable:FC<Props> = (props) => {
     setAnchorActionMenu(null);
   };*/
 
-  const handleDeleteAction = (id: number) => {
+  const handleDeleteAction = (id: string) => {
     handleCloseAction();
     if(props.handleAction) {
       props.handleAction(ActionType.delete, id)
     }
   }
-  const handleEditAction = (id: number) => {
+  const handleEditAction = (id: string) => {
     handleCloseAction();
     if(props.handleAction) {
       props.handleAction(ActionType.edit, id)
     }
   }
-  const handleCheckinAction = (id: number) => {
+  const handleCheckinAction = (id: string) => {
     handleCloseAction();
     if(props.handleAction) {
       props.handleAction(ActionType.checkin, actionId)
     }
   }
-  const handleCheckoutAction = (id: number) => {
+  const handleCheckoutAction = (id: string) => {
     handleCloseAction();
     if(props.handleAction) {
       props.handleAction(ActionType.checkout, actionId)
     }
   }
-  const handleCancelAction = (id: number) => {
+  const handleCancelAction = (id: string) => {
     handleCloseAction();
     if(props.handleAction) {
       props.handleAction(ActionType.cancel, actionId)

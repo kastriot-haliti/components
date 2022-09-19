@@ -39,7 +39,7 @@ interface Props$5 {
     handleOpenFilterDialog?(): void;
     handleOpenSettingsDialog?(e: any): void;
     handleOpenDeleteDialog?(): void;
-    handleSelectRows(selected: number[]): void;
+    handleSelectRows(selected: string[]): void;
     handleExport?(type: string): void;
     handleAction?(action: ActionType, item: any): void;
     width?: number;
@@ -96,7 +96,7 @@ interface Props$1 {
     handleOpenFilterDialog?(): void;
     handleOpenSettingsDialog?(): void;
     handleOpenDeleteDialog?(): void;
-    handleSelectRows?(selected: number[]): void;
+    handleSelectRows?(selected: string[]): void;
     width?: number;
 }
 declare const EnhancedTableBody: FC<Props$1>;
@@ -113,7 +113,7 @@ interface ITableCell {
 }
 
 interface ITableRow {
-    id: number;
+    id: string;
     key: string;
     data: ITableCell[];
 }

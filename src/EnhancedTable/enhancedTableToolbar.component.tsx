@@ -117,8 +117,14 @@ const EnhancedTableToolbar: FC<Props> = (props: Props) => {
           </Typography>}
 
           {showAddIcon() &&
-            <Button color={"primary"} onClick={props.handleClickAdd} variant="contained" size="small" style={{ marginLeft: 'auto'}}>
-              <AddIcon />
+            <Button
+                color={"primary"}
+                onClick={props.handleClickAdd}
+                variant="contained"
+                size="small"
+                style={{ marginLeft: 'auto'}}
+                startIcon={<AddIcon />}
+            >
               <Typography >Add</Typography>
             </Button>}
         </div>

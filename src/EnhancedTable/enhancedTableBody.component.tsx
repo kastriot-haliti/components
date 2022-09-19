@@ -25,7 +25,7 @@ interface Props {
   handleOpenFilterDialog?(): void;
   handleOpenSettingsDialog?(): void;
   handleOpenDeleteDialog?(): void;
-  handleSelectRows?(selected: number[]): void;
+  handleSelectRows?(selected: string[]): void;
   width?: number
 }
 
@@ -38,7 +38,7 @@ const EnhancedTableBody:FC<Props> = (props) => {
 
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof ITableColumn>();
-  const [selected, setSelected] = useState<number[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -96,7 +96,7 @@ const EnhancedTableBody:FC<Props> = (props) => {
     setSelected([]);
   };
 
-  const handleClickMulti = (event: React.MouseEvent<unknown>,id: number) => {
+  const handleClickMulti = (event: React.MouseEvent<unknown>,id: string) => {
     let newSelected: any[] = []
     const foundSelected = selected.find(x => x === id);
     if(!foundSelected) {
@@ -108,7 +108,7 @@ const EnhancedTableBody:FC<Props> = (props) => {
     setSelected(newSelected);
   }
 
-  const handleClickSingle = (event: React.MouseEvent<unknown>,id: number) => {
+  const handleClickSingle = (event: React.MouseEvent<unknown>,id: string) => {
     let newSelected: any[] = [];
     const foundSelected = selected.find(x => x === id);
     if(!foundSelected) {
@@ -119,7 +119,7 @@ const EnhancedTableBody:FC<Props> = (props) => {
     setSelected(newSelected);
   }
 
-  const handleClick = (event: React.MouseEvent<unknown>,id: number) => {
+  const handleClick = (event: React.MouseEvent<unknown>,id: string) => {
     if(multiSelection) {
       handleClickMulti(event,id);
     }else{
@@ -136,7 +136,7 @@ const EnhancedTableBody:FC<Props> = (props) => {
     setPage(0);
   };
 
-  const isSelected = (id: number) => !!selected.find(x => x === id);
+  const isSelected = (id: string) => !!selected.find(x => x === id);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =

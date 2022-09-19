@@ -1,7 +1,7 @@
 import ITableCell from './ITableCell.interface';
 
 interface ITableRow {
-  id: number,
+  id: string,
   key: string,
   data: ITableCell[]
 }

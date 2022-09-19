@@ -10,7 +10,7 @@ interface Props {
     handleOpenFilterDialog?(): void;
     handleOpenSettingsDialog?(): void;
     handleOpenDeleteDialog?(): void;
-    handleSelectRows?(selected: number[]): void;
+    handleSelectRows?(selected: string[]): void;
     width?: number;
 }
 declare const EnhancedTableBody: FC<Props>;

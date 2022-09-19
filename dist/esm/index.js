@@ -56721,8 +56721,7 @@ var EnhancedTableToolbar = function (props) {
                     " selected"),
                 showTitle() && React.createElement(Typography, { color: "primary", sx: { flex: '1 1 100%' }, variant: "h6", id: "tableTitle", component: "div" }, title),
                 showAddIcon() &&
-                    React.createElement(Button, { color: "primary", onClick: props.handleClickAdd, variant: "contained", size: "small", style: { marginLeft: 'auto' } },
-                        React.createElement(default_1$9, null),
+                    React.createElement(Button, { color: "primary", onClick: props.handleClickAdd, variant: "contained", size: "small", style: { marginLeft: 'auto' }, startIcon: React.createElement(default_1$9, null) },
                         React.createElement(Typography, null, "Add"))),
             React.createElement("div", { style: { display: 'flex', marginLeft: 'auto' } },
                 React.createElement(IconButton, { color: "primary", onClick: handleExportClickOpen },
@@ -56887,7 +56886,7 @@ var EnhancedTable = function (props) {
     var _e = useState('asc'), order = _e[0], setOrder = _e[1];
     var _f = useState(), orderBy = _f[0], setOrderBy = _f[1];
     var _g = useState([]), selected = _g[0], setSelected = _g[1];
-    var _h = useState(0), actionId = _h[0], setActionId = _h[1];
+    var _h = useState(''), actionId = _h[0], setActionId = _h[1];
     var _j = useState(0), page = _j[0], setPage = _j[1];
     var _k = useState(true), dense = _k[0], setDense = _k[1];
     var _l = useState((_a = props.rowsPerPage) !== null && _a !== void 0 ? _a : 25), rowsPerPage = _l[0], setRowsPerPage = _l[1];
@@ -56988,7 +56987,7 @@ var EnhancedTable = function (props) {
     };
     var handleCloseAction = function () {
         setAnchorActionMenu(null);
-        setActionId(0);
+        setActionId('');
     };
     /*  const [anchorActionMenu, setAnchorActionMenu] = React.useState<null | HTMLElement>(null);
      // const openActionMenu = Boolean(anchorActionMenu);

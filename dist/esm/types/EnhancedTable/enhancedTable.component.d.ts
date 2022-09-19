@@ -11,7 +11,7 @@ interface Props {
     handleOpenFilterDialog?(): void;
     handleOpenSettingsDialog?(e: any): void;
     handleOpenDeleteDialog?(): void;
-    handleSelectRows(selected: number[]): void;
+    handleSelectRows(selected: string[]): void;
     handleExport?(type: string): void;
     handleAction?(action: ActionType, item: any): void;
     width?: number;
